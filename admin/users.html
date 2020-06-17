@@ -13,6 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <!-- DataTables -->
+  <link rel="stylesheet" type="text/css" href="../plugins/DataTables/datatables.min.css"/>
   <!-- <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
   <!-- <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
   <!-- SweetAlert2 -->
@@ -28,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 <!-- Datatable -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/sp-1.1.1/datatables.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/sp-1.1.1/datatables.css"/> -->
  
 
 </head>
@@ -390,8 +391,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Jquery -->
  <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>  -->
+
 <!-- Datatable -->
- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/sp-1.1.1/datatables.js"></script>
+
+<script type="text/javascript" src="../plugins/DataTables/datatables.min.js"></script>
+ <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/sp-1.1.1/datatables.js"></script> -->
 
 
 
@@ -465,6 +469,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         $('#btnEditUser').on('click',function(){
+if(cekEditUser() === false){
+ Swal.fire(
+          'Oops!',
+            'Something Is Wrong!, Please Check Again!.',
+          'error'
+      )
+}else{
       Swal.fire({
       title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -501,6 +512,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
          
   }
 })
+    }
     });
   });
 
@@ -519,17 +531,18 @@ function cekAddUser(){
   }
 }
 
-
-function cekAlpabet(inputtxt)
-  {
-   var letters = /^[A-Za-z]+$/;
-   return letters.test(inputtxt);
+function cekEditUser(){
+  var nama = $('#edName').val();
+  var email = $('#edEmail').val();
+  if(cekAlpabet(nama)){
+    if (cekEmail(email)) {
+      return true;
+    }else{
+      return false;
+    }
+  }else{
+    return false;
   }
-  
-
-function cekEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
 }
 
 // this will not work unless you get the response
