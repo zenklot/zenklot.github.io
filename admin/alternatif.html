@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ADMIN | CRITERIA</title>
+    <title>ADMIN | ALTERNATIF</title>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="../plugins/DataTables/datatables.min.css" />
     <!-- <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="users.html" class="nav-link active">
+                                    <a href="users.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>USERS</p>
                                     </a>
@@ -101,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>SANTRI</p>
                                     </a>
@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="criteria.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>CRITERIA</p>
                                     </a>
@@ -130,7 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    VIKOR
+                                    VIKTOR
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -164,7 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">CRITERIA</h1>
+                            <h1 class="m-0 text-dark">HOME</h1>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -178,8 +178,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="info-box">
                                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Total Data Criteria :</span>
-                                    <span class="info-box-number" id="totCriteria">
+                                    <span class="info-box-text">Total Data Santri :</span>
+                                    <span class="info-box-number" id="totSan">
                                     </span>
                                 </div>
                                 <!-- /.info-box-content -->
@@ -193,8 +193,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Total Bobot :</span>
-                                    <span class="info-box-number" id="totBobot"></span>
+                                    <span class="info-box-text">Rincian Santri :</span>
+                                    <span class="info-box-number" id="rinSan"></span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -207,9 +207,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card">
                                 <div class="card-header content-justify-between">
                                     <div class="float-left">
-                                        <h3 class="card-title">MANAGE CRITERIA</h3>
+                                        <h3 class="card-title">MANAGE SANTRI</h3>
                                     </div>
-                                    <div class="float-right"><button class="btn btn-sm btn-primary swalDefaultSuccess" data-toggle="modal" data-target="#mdTambahCRT"><i class='fas fa-plus fa-lg'></i> Add New Criteria</button></div>
+                                    <div class="float-right"><button class="btn btn-sm btn-primary swalDefaultSuccess" data-toggle="modal" data-target="#mdTambah"><i class='fas fa-plus fa-lg'></i> Add New SANTRI</button></div>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -217,10 +217,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
-                                                <th>CRITERIA</th>
-                                                <th>ALIAS</th>
-                                                <th>CATEGORY</th>
-                                                <th>WEIGHT</th>
+                                                <th>NAME</th>
+                                                <th>GENDER</th>
+                                                <th>EMAIL</th>
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -260,111 +259,100 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
     <!-- Modal Tambah-->
-    <div class="modal fade" id="mdTambahCRT" tabindex="-1" role="dialog" aria-labelledby="mdTambahCRTLbl" aria-hidden="true">
+    <div class="modal fade" id="mdTambah" tabindex="-1" role="dialog" aria-labelledby="mdTambahLbl" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdTambahCRTLbl">Add New User</h5>
+                    <h5 class="modal-title" id="mdTambahLbl">Add New User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="inCriteria">Criteria Name</label>
-                        <input type="text" class="form-control" id="inCriteria" placeholder="Enter Criteria">
+                        <label for="inEmail">Email address</label>
+                        <input type="email" class="form-control" id="inEmail" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="inAlias">Alias</label>
-                        <input type="text" class="form-control" id="inAlias" placeholder="Enter Criteria">
+                        <label for="inName">Full Name</label>
+                        <input type="text" class="form-control" id="inName" placeholder="Enter full name">
                     </div>
                     <div class="form-group">
-                        <label for="inCategory">CATEGORY</label>
-                        <select class="form-control" style="width: 100%;" id="inCategory">
-                            <option selected="selected" value="cost">COST</option>
-                            <option value="benefit">BENEFIT</option>
+                        <label>Gender</label>
+                        <select class="form-control" style="width: 100%;" id="inGender">
+                            <option selected="selected" value="female">Female</option>
+                            <option value="male">Male</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="inWeight">WEIGHT</label>
-                        <input type="text" class="form-control" id="inWeight" placeholder="Enter Weight">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnAddCRT">Add Criteria</button>
+                    <button type="button" class="btn btn-primary" id="btnAddUser">Add User</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Edit-->
-    <div class="modal fade" id="mdEditCRT" tabindex="-1" role="dialog" aria-labelledby="mdEditCRT1" aria-hidden="true">
+    <div class="modal fade" id="mdEdit" tabindex="-1" role="dialog" aria-labelledby="mdEdit1" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdEditCRT1">Modif User</h5>
+                    <h5 class="modal-title" id="mdEdit1">Modif User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="edIdCRT">
+                    <input type="hidden" id="edIdUser">
                     <div class="form-group">
-                        <label for="edCriteria">Criteria Name</label>
-                        <input type="text" class="form-control" id="edCriteria" placeholder="Enter Criteria">
+                        <label for="edEmail">Email address</label>
+                        <input type="email" class="form-control" id="edEmail" placeholder="Enter email">
+                        <span></span>
                     </div>
                     <div class="form-group">
-                        <label for="edAlias">Alias</label>
-                        <input type="text" class="form-control" id="edAlias" placeholder="Enter Criteria">
+                        <label for="edName">Full Name</label>
+                        <input type="text" class="form-control" id="edName" placeholder="Enter full name">
                     </div>
                     <div class="form-group">
-                        <label for="edCategory">CATEGORY</label>
-                        <select class="form-control" style="width: 100%;" id="edCategory">
-                            <option selected="selected" value="cost">COST</option>
-                            <option value="benefit">BENEFIT</option>
+                        <label>Gender</label>
+                        <select class="form-control" style="width: 100%;" id="edGender">
+                            <option selected="selected" value="female">Female</option>
+                            <option value="male">Male</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="edWeight">WEIGHT</label>
-                        <input type="text" class="form-control" id="edWeight" placeholder="Enter Weight">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnEditCRT">Update Criteria</button>
+                    <button type="button" class="btn btn-primary" id="btnEditUser">Update User</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal Detail-->
-    <div class="modal fade" id="mdDetCRT" tabindex="-1" role="dialog" aria-labelledby="mdDetCRT1" aria-hidden="true">
+    <div class="modal fade" id="mdDet" tabindex="-1" role="dialog" aria-labelledby="mdDet1" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdDetCRT1">Detail Criteria</h5>
+                    <h5 class="modal-title" id="mdDet1">Detail User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="deCriteria">Criteria Name</label>
-                        <input type="text" class="form-control" id="deCriteria" placeholder="Enter Criteria" disabled="disabled">
+                        <label for="deEmail">Email address</label>
+                        <input type="email" class="form-control" id="deEmail" placeholder="Enter email" disabled="disabled">
                     </div>
                     <div class="form-group">
-                        <label for="deAlias">Alias</label>
-                        <input type="text" class="form-control" id="deAlias" placeholder="Enter Criteria" disabled="disabled">
+                        <label for="deName">Full Name</label>
+                        <input type="text" class="form-control" id="deName" placeholder="Enter full name" disabled="disabled">
                     </div>
                     <div class="form-group">
-                        <label for="deCategory">CATEGORY</label>
-                        <select class="form-control" style="width: 100%;" id="deCategory" disabled="disabled">
-                            <option selected="selected" value="cost">COST</option>
-                            <option value="benefit">BENEFIT</option>
+                        <label>Gender</label>
+                        <select class="form-control" style="width: 100%;" id="deGender" disabled="disabled">
+                            <option selected="selected" value="female">Female</option>
+                            <option value="male">Male</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="deWeight">WEIGHT</label>
-                        <input type="text" class="form-control" id="deWeight" placeholder="Enter Weight" disabled="disabled">
                     </div>
                     <div class="form-group">
                         <label for="deCreated">Date Created</label>
@@ -373,6 +361,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="form-group">
                         <label for="deUpdate">Date Last Update</label>
                         <input type="text" class="form-control" id="deUpdate" placeholder="Enter full name" disabled="disabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="deToken">Token Expired</label>
+                        <input type="text" class="form-control" id="deToken" placeholder="Date-Token-Expired" disabled="disabled">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -400,11 +392,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../assets/js/viktor.js"></script>
     <script>
     $(document).ready(function() {
-        getCriteria();
-        validWeight();
-        
-        $('#btnAddCRT').on('click', function() {
-            var cek = cekAddCRT();
+        getUsers();
+
+        $('#btnAddUser').on('click', function() {
+            var cek = cekAddUser();
 
             if (cek == true) {
                 Swal.fire({
@@ -414,17 +405,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Add New Criteria'
+                    confirmButtonText: 'Yes, Add New User'
                 }).then((result) => {
                     if (result.value) {
-                        var criteria = $('#inCriteria').val();
-                        var alias = $('#inAlias').val();
-                        var category = $('#inCategory').val();
-                        var weight = $('#inWeight').val();
+                        var name = $("#inName").val();
+                        var gender = $("#inGender").val();
+                        var email = $("#inEmail").val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/criteria/create', // url where to submit the request
+                            url: 'http://spk-psi.herokuapp.com/api/v1/user/create', // url where to submit the request
                             type: "POST",
-                            data: { name: criteria, alias: alias, category: category, weight: weight },
+                            data: { name: name, gender: gender, email: email },
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded",
                                 "Cache-Control": "no-cache"
@@ -433,20 +423,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 kosongkanTabel('ini_table');
                                 setTimeout(
                                     function() {
-                                        getCriteria();
+                                        getUsers();
                                     }, 500);
 
                                 Swal.fire(
-                                    'Add New Criteria!',
-                                    'New Criteria Has Been Added.',
+                                    'Add New User!',
+                                    'New User Has Been Added.',
                                     'success'
                                 )
-                                EmptyAddCriteria();
+                                EmptyAddUser();
                             },
                             error: function() {
                                 Swal.fire(
                                     'Oops!',
-                                    'Adding new Criteria has been canceled.',
+                                    'Adding new user has been canceled.',
                                     'error'
                                 )
                             }
@@ -467,8 +457,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
 
 
-        $('#btnEditCRT').on('click', function() {
-            if (cekEditCRT() === false) {
+        $('#btnEditUser').on('click', function() {
+            if (cekEditUser() === false) {
                 Swal.fire(
                     'Oops!',
                     'Something Is Wrong!, Please Check Again!.',
@@ -482,18 +472,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Update This Criteria'
+                    confirmButtonText: 'Yes, Update This User'
                 }).then((result) => {
                     if (result.value) {
-                        var criteria = $('#edCriteria').val();
-                        var alias = $('#edAlias').val();
-                        var category = $('#edCategory').val();
-                        var weight = $('#edWeight').val();
-                        var ids = $("#edIdCRT").val();
+                        var name = $("#edName").val();
+                        var gender = $("#edGender").val();
+                        var email = $("#edEmail").val();
+                        var ids = $("#edIdUser").val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/criteria/' + ids + '/update', // url where to submit the request
+                            url: 'http://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
                             type: "PUT",
-                            data: { name: criteria, alias: alias, category: category, weight: weight },
+                            data: { name: name, gender: gender, email: email },
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded",
                                 "Cache-Control": "no-cache",
@@ -502,19 +491,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         });
 
                         kosongkanTabel('ini_table');
-                        setTimeout(
-                            function() {
-                                getCriteria();
-                            }, 500);
-
-                        $('#mdEditCRT').modal('toggle');
+                         setTimeout(
+                                    function() {
+                        getUsers();
+                                    }, 500);
+                        
+                        $('#mdEdit').modal('toggle');
 
                         Swal.fire(
-                            'Update Criteria!',
-                            'Update Criteria Has Been Success.',
+                            'Update User!',
+                            'Update User Has Been Success.',
                             'success'
                         )
-                        EmptyAddCriteria();
+                        EmptyAddUser();
 
                     }
                 })
