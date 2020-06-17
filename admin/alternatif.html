@@ -209,17 +209,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="float-left">
                                         <h3 class="card-title">MANAGE SANTRI</h3>
                                     </div>
-                                    <div class="float-right"><button class="btn btn-sm btn-primary swalDefaultSuccess" data-toggle="modal" data-target="#mdTambah"><i class='fas fa-plus fa-lg'></i> Add New SANTRI</button></div>
+                                    <div class="float-right"><button class="btn btn-sm btn-primary swalDefaultSuccess" data-toggle="modal" data-target="#mdTambahSan" id="addAlternatif"><i class='fas fa-plus fa-lg'></i> Add New SANTRI</button></div>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="ini_table" class="table table-striped table-bordered hidden" style="width:100%;">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
+                                                <th>ALTERNATIF</th>
+                                                <th>NO INDUK DTA</th>
+                                                <th>NIK</th>
                                                 <th>NAME</th>
                                                 <th>GENDER</th>
-                                                <th>EMAIL</th>
+                                                <th>DTA</th>
                                                 <th>ACTIONS</th>
                                             </tr>
                                         </thead>
@@ -259,38 +261,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
     <!-- Modal Tambah-->
-    <div class="modal fade" id="mdTambah" tabindex="-1" role="dialog" aria-labelledby="mdTambahLbl" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="mdTambahSan">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdTambahLbl">Add New User</h5>
+                    <h4 class="modal-title">Add New Alternatif</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="inEmail">Email address</label>
-                        <input type="email" class="form-control" id="inEmail" placeholder="Enter email">
+                    <input type="hidden" id="inIdDta">
+                    <div class="form-group row">
+                        <label for="inDTAid" class="col-sm-2 col-form-label">DTA</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" style="width: 100%;" id="inDTAid">
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inName">Full Name</label>
-                        <input type="text" class="form-control" id="inName" placeholder="Enter full name">
-                    </div>
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control" style="width: 100%;" id="inGender">
-                            <option selected="selected" value="female">Female</option>
-                            <option value="male">Male</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="inDTAid" class="col-sm-2 col-form-label">No Induk DTA</label>
+                        <div class="col-sm-10">
+          
+                    <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="paramDta"></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="No Induk DTA">
+                </div>
+
+                        </div>
+            </div>
+
+            <div class="form-group row">
+                        <label for="inNik" class="col-sm-2 col-form-label">NIK</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inNik" placeholder="Enter NIK...">
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnAddUser">Add User</button>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnAddSan">Save changes</button>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
     <!-- Modal Edit-->
     <div class="modal fade" id="mdEdit" tabindex="-1" role="dialog" aria-labelledby="mdEdit1" aria-hidden="true">
@@ -392,123 +409,146 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../assets/js/viktor.js"></script>
     <script>
     $(document).ready(function() {
-        getUsers();
+        getAlternatif();
 
-        $('#btnAddUser').on('click', function() {
-            var cek = cekAddUser();
+        $('#addAlternatif').on('click', function() {
+            loadJSON('http://spk-psi.herokuapp.com/api/v1/dta', function GetDtaid() {
+                hasil = json['data'];
+                var opsi = '';
+                opsi = "<option value='' data-statistik=''>-</option>";
+                for (var i = 0; i < hasil.length; i++) {
+                    var dta = hasil[i];
+                    // console.log(dta['created_at'])
+                    opsi +=
+                        "<option value='" + dta['id'] + "' data-statistik='"+dta['no_statistik']+"'>" + dta['name'] + "</option>";
+                }
+                $('#inDTAid').html(opsi);
 
-            if (cek == true) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Add New User'
-                }).then((result) => {
-                    if (result.value) {
-                        var name = $("#inName").val();
-                        var gender = $("#inGender").val();
-                        var email = $("#inEmail").val();
-                        $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/user/create', // url where to submit the request
-                            type: "POST",
-                            data: { name: name, gender: gender, email: email },
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded",
-                                "Cache-Control": "no-cache"
-                            },
-                            success: function() {
-                                kosongkanTabel('ini_table');
-                                setTimeout(
-                                    function() {
-                                        getUsers();
-                                    }, 500);
-
-                                Swal.fire(
-                                    'Add New User!',
-                                    'New User Has Been Added.',
-                                    'success'
-                                )
-                                EmptyAddUser();
-                            },
-                            error: function() {
-                                Swal.fire(
-                                    'Oops!',
-                                    'Adding new user has been canceled.',
-                                    'error'
-                                )
-                            }
-                        });
-
-
-
-                    }
-                })
-            } else {
-                Swal.fire(
-                    'Oops!',
-                    'Something Is Wrong!, Please Check Again!.',
-                    'error'
-                )
-            }
-
+            });
         });
 
 
-        $('#btnEditUser').on('click', function() {
-            if (cekEditUser() === false) {
-                Swal.fire(
-                    'Oops!',
-                    'Something Is Wrong!, Please Check Again!.',
-                    'error'
-                )
-            } else {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Update This User'
-                }).then((result) => {
-                    if (result.value) {
-                        var name = $("#edName").val();
-                        var gender = $("#edGender").val();
-                        var email = $("#edEmail").val();
-                        var ids = $("#edIdUser").val();
-                        $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
-                            type: "PUT",
-                            data: { name: name, gender: gender, email: email },
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded",
-                                "Cache-Control": "no-cache",
-                                "X-HTTP-Method-Override": "PUT"
-                            } // X-HTTP-Method-Override set to PUT.
-                        });
-
-                        kosongkanTabel('ini_table');
-                         setTimeout(
-                                    function() {
-                        getUsers();
-                                    }, 500);
-                        
-                        $('#mdEdit').modal('toggle');
-
-                        Swal.fire(
-                            'Update User!',
-                            'Update User Has Been Success.',
-                            'success'
-                        )
-                        EmptyAddUser();
-
-                    }
-                })
-            }
+        $('#inDTAid').on('change',function(e){
+             var paramInduk = $("option:selected", this).data('statistik');
+             $('#paramDta').html(paramInduk);
+             console.log(this.value);
         });
+
+
+
+        // $('#btnAddUser').on('click', function() {
+        //     var cek = cekAddUser();
+
+        //     if (cek == true) {
+        //         Swal.fire({
+        //             title: 'Are you sure?',
+        //             text: "You won't be able to revert this!",
+        //             icon: 'warning',
+        //             showCancelButton: true,
+        //             confirmButtonColor: '#3085d6',
+        //             cancelButtonColor: '#d33',
+        //             confirmButtonText: 'Yes, Add New User'
+        //         }).then((result) => {
+        //             if (result.value) {
+        //                 var name = $("#inName").val();
+        //                 var gender = $("#inGender").val();
+        //                 var email = $("#inEmail").val();
+        //                 $.ajax({
+        //                     url: 'http://spk-psi.herokuapp.com/api/v1/user/create', // url where to submit the request
+        //                     type: "POST",
+        //                     data: { name: name, gender: gender, email: email },
+        //                     headers: {
+        //                         "Content-Type": "application/x-www-form-urlencoded",
+        //                         "Cache-Control": "no-cache"
+        //                     },
+        //                     success: function() {
+        //                         kosongkanTabel('ini_table');
+        //                         setTimeout(
+        //                             function() {
+        //                                 getUsers();
+        //                             }, 500);
+
+        //                         Swal.fire(
+        //                             'Add New User!',
+        //                             'New User Has Been Added.',
+        //                             'success'
+        //                         )
+        //                         EmptyAddUser();
+        //                     },
+        //                     error: function() {
+        //                         Swal.fire(
+        //                             'Oops!',
+        //                             'Adding new user has been canceled.',
+        //                             'error'
+        //                         )
+        //                     }
+        //                 });
+
+
+
+        //             }
+        //         })
+        //     } else {
+        //         Swal.fire(
+        //             'Oops!',
+        //             'Something Is Wrong!, Please Check Again!.',
+        //             'error'
+        //         )
+        //     }
+        // });
+
+        // $('#btnEditUser').on('click', function() {
+        //     if (cekEditUser() === false) {
+        //         Swal.fire(
+        //             'Oops!',
+        //             'Something Is Wrong!, Please Check Again!.',
+        //             'error'
+        //         )
+        //     } else {
+        //         Swal.fire({
+        //             title: 'Are you sure?',
+        //             text: "You won't be able to revert this!",
+        //             icon: 'warning',
+        //             showCancelButton: true,
+        //             confirmButtonColor: '#3085d6',
+        //             cancelButtonColor: '#d33',
+        //             confirmButtonText: 'Yes, Update This User'
+        //         }).then((result) => {
+        //             if (result.value) {
+        //                 var name = $("#edName").val();
+        //                 var gender = $("#edGender").val();
+        //                 var email = $("#edEmail").val();
+        //                 var ids = $("#edIdUser").val();
+        //                 $.ajax({
+        //                     url: 'http://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
+        //                     type: "PUT",
+        //                     data: { name: name, gender: gender, email: email },
+        //                     headers: {
+        //                         "Content-Type": "application/x-www-form-urlencoded",
+        //                         "Cache-Control": "no-cache",
+        //                         "X-HTTP-Method-Override": "PUT"
+        //                     } // X-HTTP-Method-Override set to PUT.
+        //                 });
+
+        //                 kosongkanTabel('ini_table');
+        //                  setTimeout(
+        //                             function() {
+        //                 getUsers();
+        //                             }, 500);
+
+        //                 $('#mdEdit').modal('toggle');
+
+        //                 Swal.fire(
+        //                     'Update User!',
+        //                     'Update User Has Been Success.',
+        //                     'success'
+        //                 )
+        //                 EmptyAddUser();
+
+        //             }
+        //         })
+        //     }
+        // });
     });
 
 

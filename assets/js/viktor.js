@@ -159,6 +159,40 @@ function getCriteria() {
 
 }
 
+function getAlternatif() {
+
+    loadJSON('http://spk-psi.herokuapp.com/api/v1/alternatif', function GetDta() {
+        $("#totSan").html(json['data'].length);
+        hasil = json['data'];
+        var table = '';
+        for (var i = 0; i < hasil.length; i++) {
+            var dta = hasil[i];
+            // console.log(dta['created_at'])
+            table +=
+                "<tr>" +
+                "<td>" + (i + 1) + "</td>" +
+                "<td>" + dta['no_induk_dta'] + "</td>" +
+                "<td>" + dta['nik'] + "</td>" +
+                "<td>" + dta['name'] + "</td>" +
+                "<td>" + jk(dta['gender']) + "</td>" +
+                "<td>" + dta['nama_dta'] + "</td>" +
+                "<td><button class='btn btn-sm bg-danger' onclick='deleteSan(" + dta['id'] + ")'><i class='fas fa-trash fa-lg'></i></button> <button class='btn btn-sm bg-info' onclick='GetEditSan(" + dta['id'] + ")'><i class='fas fa-edit fa-lg'></i></button> <button class='btn btn-sm bg-success' onclick='GetDetSan(" + dta['id'] + ")'><i class='fas fa-eye fa-lg'></i></button></td>" +
+                "</tr>";
+        }
+        $('#test').html(table);
+        $('#ini_table').DataTable({
+            responsive: true,
+            "processing": true,
+            "lengthMenu": [
+                [10, 25, 50, 100, 150, -1],
+                [10, 25, 50, 100, 150, "All"]
+            ]
+        });
+
+    });
+
+}
+
 
 function getENUM() {
 
