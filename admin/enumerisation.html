@@ -384,7 +384,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var name = $('#inNameEnum').val();
                         var value = $('#inValue').val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/enumerisation/create', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/enumerisation/create', // url where to submit the request
                             type: "POST",
                             data: { name: name, value: value},
                             headers: {
@@ -451,7 +451,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var value = $('#edValue').val();
                         var ids = $("#edIdENUM").val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/enumerisation/' + ids + '/update', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/enumerisation/' + ids + '/update', // url where to submit the request
                             type: "PUT",
                             data: { name: name, value: value},
                             headers: {

@@ -422,7 +422,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var category = $('#inCategory').val();
                         var weight = $('#inWeight').val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/criteria/create', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/criteria/create', // url where to submit the request
                             type: "POST",
                             data: { name: criteria, alias: alias, category: category, weight: weight },
                             headers: {
@@ -491,7 +491,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var weight = $('#edWeight').val();
                         var ids = $("#edIdCRT").val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/criteria/' + ids + '/update', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/criteria/' + ids + '/update', // url where to submit the request
                             type: "PUT",
                             data: { name: criteria, alias: alias, category: category, weight: weight },
                             headers: {

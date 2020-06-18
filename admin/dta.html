@@ -413,7 +413,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var AddressDTA = $('#inAddress').val()
                         var HeadmasterDTA = $('#inHeadmaster').val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/dta/create', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/dta/create', // url where to submit the request
                             type: "POST",
                             data: { no_statistik: nostatistik, name: nameDTA, address: AddressDTA, headmaster: HeadmasterDTA },
                             headers: {
@@ -482,7 +482,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var AddressDTA = $('#edAddress').val()
                         var HeadmasterDTA = $('#edHeadmaster').val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/dta/' + ids + '/update', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/dta/' + ids + '/update', // url where to submit the request
                             type: "PUT",
                             data: { no_statistik: nostatistik, name: nameDTA, address: AddressDTA, headmaster: HeadmasterDTA },
                             headers: {

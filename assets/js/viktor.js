@@ -51,7 +51,7 @@ function getUsers() {
     var men = 0;
     var women = 0;
 
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/users', function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/users', function dtaUser() {
         hasil = json['data'];
         $("#totUsr").html(hasil.length);
         var table = '';
@@ -91,7 +91,7 @@ function getUsers() {
 
 function getDTA() {
 
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/dta', function GetDta() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function GetDta() {
         $("#totDTA").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -125,8 +125,8 @@ function getDTA() {
 
 function getCriteria() {
 
-    var totalBobot=0;
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/criterias', function GetDta() {
+    var totalBobot = 0;
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', function GetDta() {
         $("#totCriteria").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -144,7 +144,7 @@ function getCriteria() {
                 "</tr>";
             totalBobot = totalBobot + dta['weight'];
         }
-        $("#totBobot").html(totalBobot+"%");
+        $("#totBobot").html(totalBobot + "%");
         $('#test').html(table);
         $('#ini_table').DataTable({
             responsive: true,
@@ -161,7 +161,7 @@ function getCriteria() {
 
 function getAlternatif() {
 
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/alternatif', function GetDta() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', function GetDta() {
         $("#totSan").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -196,8 +196,8 @@ function getAlternatif() {
 
 function getENUM() {
 
-    var totalBobot=0;
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/enumerisation', function GetDta() {
+    var totalBobot = 0;
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation', function GetDta() {
         $("#totEnum").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -211,7 +211,7 @@ function getENUM() {
                 "<td>" + dta['value'] + "</td>" +
                 "<td><button class='btn btn-sm bg-danger' onclick='deleteENUM(" + dta['id'] + ")'><i class='fas fa-trash fa-lg'></i></button> <button class='btn btn-sm bg-info' onclick='GetEditENUM(" + dta['id'] + ")'><i class='fas fa-edit fa-lg'></i></button> <button class='btn btn-sm bg-success' onclick='GetDetENUM(" + dta['id'] + ")'><i class='fas fa-eye fa-lg'></i></button></td>" +
                 "</tr>"
-            
+
         }
         $('#test').html(table);
         $('#ini_table').DataTable({
@@ -232,7 +232,7 @@ function GetEditUser(id) {
     // console.log(id);
     $('#mdEdit').modal('toggle');
     $('#edIdUser').val(id);
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/user/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/user/' + id, function dtaUser() {
         $('#edEmail').val(json['data'][0]['email']);
         $('#edName').val(json['data'][0]['name']);
         $('#edGender').val(json['data'][0]['gender']);
@@ -243,7 +243,7 @@ function GetEditDTA(id) {
     // console.log(id);
     $('#mdEditDTA').modal('toggle');
     $('#edIdDTA').val(id);
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/dta/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + id, function dtaUser() {
         $('#edStatis').val(json['data'][0]['no_statistik']);
         $('#edNameDta').val(json['data'][0]['name']);
         $('#edAddress').val(json['data'][0]['address']);
@@ -255,7 +255,7 @@ function GetEditCRT(id) {
     // console.log(id);
     $('#mdEditCRT').modal('toggle');
     $('#edIdCRT').val(id);
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/criteria/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criteria/' + id, function dtaUser() {
         $('#edCriteria').val(json['data'][0]['name']);
         $('#edAlias').val(json['data'][0]['alias']);
         $('#edCategory').val(json['data'][0]['category']);
@@ -267,7 +267,7 @@ function GetEditENUM(id) {
     // console.log(id);
     $('#mdEditENUM').modal('toggle');
     $('#edIdENUM').val(id);
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, function dtaUser() {
         $('#edNameEnum').val(json['data'][0]['name']);
         $('#edValue').val(json['data'][0]['value'])
     });
@@ -276,7 +276,7 @@ function GetEditENUM(id) {
 function GetDetUser(id) {
     // console.log(id);
     $('#mdDet').modal('toggle');
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/user/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/user/' + id, function dtaUser() {
         $('#deEmail').val(json['data'][0]['email']);
         $('#deName').val(json['data'][0]['name']);
         $('#deGender').val(json['data'][0]['gender']);
@@ -289,7 +289,7 @@ function GetDetUser(id) {
 function GetDetDTA(id) {
     // console.log(id);
     $('#mdDetDTA').modal('toggle');
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/dta/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + id, function dtaUser() {
         $('#deStatis').val(json['data'][0]['no_statistik']);
         $('#deNameDta').val(json['data'][0]['name']);
         $('#deAddress').val(json['data'][0]['address']);
@@ -302,13 +302,13 @@ function GetDetDTA(id) {
 function GetDetCRT(id) {
     // console.log(id);
     $('#mdDetCRT').modal('toggle');
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/criteria/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criteria/' + id, function dtaUser() {
 
         $('#deCriteria').val(json['data'][0]['name']);
         $('#deAlias').val(json['data'][0]['alias']);
         $('#deCategory').val(json['data'][0]['category']);
         $('#deWeight').val(json['data'][0]['weight']);
-         $('#deCreated').val(json['data'][0]['created_at']);
+        $('#deCreated').val(json['data'][0]['created_at']);
         $('#deUpdate').val(json['data'][0]['updated_at']);
     });
 }
@@ -316,7 +316,7 @@ function GetDetCRT(id) {
 function GetDetENUM(id) {
     // console.log(id);
     $('#mdDetENUM').modal('toggle');
-    loadJSON('http://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, function dtaUser() {
 
         $('#deNameEnum').val(json['data'][0]['name']);
         $('#deValue').val(json['data'][0]['value']);
@@ -339,7 +339,7 @@ function deleteUser(id) {
         if (result.value) {
             // var id =  id;
             $.ajax({
-                url: 'http://spk-psi.herokuapp.com/api/v1/user/' + id + '/delete',
+                url: 'https://spk-psi.herokuapp.com/api/v1/user/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -380,7 +380,7 @@ function deleteDTA(id) {
         if (result.value) {
             // var id =  id;
             $.ajax({
-                url: 'http://spk-psi.herokuapp.com/api/v1/dta/' + id + '/delete',
+                url: 'https://spk-psi.herokuapp.com/api/v1/dta/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -421,7 +421,7 @@ function deleteCRT(id) {
         if (result.value) {
             // var id =  id;
             $.ajax({
-                url: 'http://spk-psi.herokuapp.com/api/v1/criteria/' + id + '/delete',
+                url: 'https://spk-psi.herokuapp.com/api/v1/criteria/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -462,7 +462,7 @@ function deleteENUM(id) {
         if (result.value) {
             // var id =  id;
             $.ajax({
-                url: 'http://spk-psi.herokuapp.com/api/v1/enumerisation/' + id + '/delete',
+                url: 'https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -510,8 +510,20 @@ function EmptyAddDTA() {
 
 };
 
+function EmptyAddSan() {
+    $('#inDtaName').val('');
+    $('#inParamDta').val('');
+    $('#inDTAid').val('-');
+    $('#paramDta').val('');
+    $('#inDtaParam').val('');
+    $('#inNik').val('');
+    $('#inNameSan').val('');
+    $('#inGenderSan').val('');
+
+};
+
 function EmptyAddCriteria() {
-    
+
     $('#inCriteria').val('');
     $('#inAlias').val('');
     $('#inCategory').val('');
@@ -524,7 +536,7 @@ function EmptyAddEnum() {
 };
 
 function cekAlpabet(inputtxt) {
-    var letters = /^[A-Za-z]+$/;
+    var letters = /^[A-Za-z][A-Za-z\s]*$/;
     return letters.test(inputtxt);
 }
 
@@ -579,6 +591,20 @@ function cekAddENUM() {
     }
 }
 
+
+function cekAddSan() {
+    var dtaId = $('#inDTAid').val();
+    var nik = $('#inNik').val();
+    var name = $('#inNameSan').val();
+    var induk = $('#inDtaParam').val();
+    // console.log(dtaId+" "+nik+" "+name+" "+induk)
+    if (dtaId == '' || cekAngka(nik) == false || cekAlpabet(name) == false || cekAngka(induk) == false) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function cekAddDTA() {
     var nostatistik = $('#inStatis').val();
     var nameDTA = $('#inNameDta').val()
@@ -587,17 +613,17 @@ function cekAddDTA() {
 
     if (cekAngka(nostatistik)) {
         if (nostatistik.length > 10) {
-            if (cekAlpabet(nameDTA)){
+            if (cekAlpabet(nameDTA)) {
                 // console.log('Benar');
                 // if (cekAlpabet(HeadmasterDTA)) {
-                    // console.log('lagi');
-                    // if (AddressDTA.length > 10) {
-                        // return true;
-                    // }else{
-                        // return false;
-                    // }
+                // console.log('lagi');
+                // if (AddressDTA.length > 10) {
+                // return true;
                 // }else{
-                    return true;
+                // return false;
+                // }
+                // }else{
+                return true;
                 // }
 
             } else {
@@ -627,7 +653,7 @@ function cekEditUser() {
     }
 }
 
-function cekEditCRT(){
+function cekEditCRT() {
     var criteria = $('#edCriteria').val();
     var alias = $('#edAlias').val();
     var category = $('#edCategory').val();
@@ -640,7 +666,7 @@ function cekEditCRT(){
     }
 }
 
-function cekEditENUM(){
+function cekEditENUM() {
     var name = $('#edNameEnum').val();
     var value = $('#edValue').val();
 
@@ -657,19 +683,19 @@ function cekEditDTA() {
     var AddressDTA = $('#edAddress').val()
     var HeadmasterDTA = $('#edHeadmaster').val();
 
-     if (cekAngka(nostatistik)) {
+    if (cekAngka(nostatistik)) {
         if (nostatistik.length > 10) {
-            if (cekAlpabet(nameDTA)){
+            if (cekAlpabet(nameDTA)) {
                 // console.log('Benar');
                 // if (cekAlpabet(HeadmasterDTA)) {
-                    // console.log('lagi');
-                    // if (AddressDTA.length > 10) {
-                        // return true;
-                    // }else{
-                        // return false;
-                    // }
+                // console.log('lagi');
+                // if (AddressDTA.length > 10) {
+                // return true;
                 // }else{
-                    return true;
+                // return false;
+                // }
+                // }else{
+                return true;
                 // }
 
             } else {
@@ -686,11 +712,11 @@ function cekEditDTA() {
 
 
 
-function validWeight(){
+function validWeight() {
     var total = $('#totBobot').html();
-    if(total == "100%"){
-        
-    }else{
+    if (total == "100%") {
+
+    } else {
         toastr.error('Total Jumlah Bobot Tidak Sesuai!, Sesuaikan Total Bobot Ke 100%');
     }
 

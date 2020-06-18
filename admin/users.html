@@ -412,7 +412,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var gender = $("#inGender").val();
                         var email = $("#inEmail").val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/user/create', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/user/create', // url where to submit the request
                             type: "POST",
                             data: { name: name, gender: gender, email: email },
                             headers: {
@@ -480,7 +480,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var email = $("#edEmail").val();
                         var ids = $("#edIdUser").val();
                         $.ajax({
-                            url: 'http://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
+                            url: 'https://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
                             type: "PUT",
                             data: { name: name, gender: gender, email: email },
                             headers: {

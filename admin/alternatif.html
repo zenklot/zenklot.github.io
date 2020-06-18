@@ -271,7 +271,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="inIdDta">
+                    <input type="hidden" id="inDtaName">
+                    <input type="hidden" id="inParamDta">
                     <div class="form-group row">
                         <label for="inDTAid" class="col-sm-2 col-form-label">DTA</label>
                         <div class="col-sm-10">
@@ -280,23 +281,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inDTAid" class="col-sm-2 col-form-label">No Induk DTA</label>
+                        <label for="inDtaParam" class="col-sm-2 col-form-label">No Induk DTA</label>
                         <div class="col-sm-10">
-          
-                    <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="paramDta"></span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="No Induk DTA">
-                </div>
-
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="paramDta"></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="No Induk DTA" id="inDtaParam">
+                            </div>
                         </div>
-            </div>
-
-            <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="inNik" class="col-sm-2 col-form-label">NIK</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inNik" placeholder="Enter NIK...">
+                            <input type="text" class="form-control" id="inNik" placeholder="Enter NIK">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inNameSan" class="col-sm-2 col-form-label">Full Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inNameSan" placeholder="Enter full name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inGenderSan" class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" style="width: 100%;" id="inGenderSan">
+                                <option selected="selected" value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -412,15 +425,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
         getAlternatif();
 
         $('#addAlternatif').on('click', function() {
-            loadJSON('http://spk-psi.herokuapp.com/api/v1/dta', function GetDtaid() {
+            loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function GetDtaid() {
                 hasil = json['data'];
                 var opsi = '';
-                opsi = "<option value='' data-statistik=''>-</option>";
+                opsi = "<option value='' data-statistik='' data-namedta=''>-</option>";
                 for (var i = 0; i < hasil.length; i++) {
                     var dta = hasil[i];
                     // console.log(dta['created_at'])
                     opsi +=
-                        "<option value='" + dta['id'] + "' data-statistik='"+dta['no_statistik']+"'>" + dta['name'] + "</option>";
+                        "<option value='" + dta['id'] + "' data-statistik='" + dta['no_statistik'] + "' data-namedta='" + dta['name'] + "'>" + dta['name'] + "</option>";
                 }
                 $('#inDTAid').html(opsi);
 
@@ -428,74 +441,80 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
 
 
-        $('#inDTAid').on('change',function(e){
-             var paramInduk = $("option:selected", this).data('statistik');
-             $('#paramDta').html(paramInduk);
-             console.log(this.value);
+        $('#inDTAid').on('change', function(e) {
+            var paramInduk = $("option:selected", this).data('statistik');
+            var dtaName = $("option:selected", this).data('namedta');
+            $('#paramDta').html(paramInduk);
+            $('#inDtaName').val(dtaName);
+            $('#inParamDta').val(paramInduk);
+            // console.log(this.value);
         });
 
 
 
-        // $('#btnAddUser').on('click', function() {
-        //     var cek = cekAddUser();
+        $('#btnAddSan').on('click', function() {
+            var cek = cekAddSan();
 
-        //     if (cek == true) {
-        //         Swal.fire({
-        //             title: 'Are you sure?',
-        //             text: "You won't be able to revert this!",
-        //             icon: 'warning',
-        //             showCancelButton: true,
-        //             confirmButtonColor: '#3085d6',
-        //             cancelButtonColor: '#d33',
-        //             confirmButtonText: 'Yes, Add New User'
-        //         }).then((result) => {
-        //             if (result.value) {
-        //                 var name = $("#inName").val();
-        //                 var gender = $("#inGender").val();
-        //                 var email = $("#inEmail").val();
-        //                 $.ajax({
-        //                     url: 'http://spk-psi.herokuapp.com/api/v1/user/create', // url where to submit the request
-        //                     type: "POST",
-        //                     data: { name: name, gender: gender, email: email },
-        //                     headers: {
-        //                         "Content-Type": "application/x-www-form-urlencoded",
-        //                         "Cache-Control": "no-cache"
-        //                     },
-        //                     success: function() {
-        //                         kosongkanTabel('ini_table');
-        //                         setTimeout(
-        //                             function() {
-        //                                 getUsers();
-        //                             }, 500);
+            if (cek == true) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Add New User'
+                }).then((result) => {
+                    if (result.value) {
+                        var dtaId = $('#inDTAid').val();
+                        var induk = $('#inParamDta').val() +""+$('#inDtaParam').val();
+                        var nik = $('#inNik').val();
+                        var name = $('#inNameSan').val();
+                        var gender = $('#inGenderSan').val();
+                        console.log(dtaId+" "+induk+" "+nik+" "+name+" "+gender);
+                        $.ajax({
+                            url: 'https://spk-psi.herokuapp.com/api/v1/alternatif/create', // url where to submit the request
+                            type: "POST",
+                            data: { dta_id: dtaId, no_induk_dta: induk, name: name, nik: nik, gender: gender },
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                                "Cache-Control": "no-cache"
+                            },
+                            success: function() {
+                                kosongkanTabel('ini_table');
+                                setTimeout(
+                                    function() {
+                                        getAlternatif();
+                                    }, 500);
 
-        //                         Swal.fire(
-        //                             'Add New User!',
-        //                             'New User Has Been Added.',
-        //                             'success'
-        //                         )
-        //                         EmptyAddUser();
-        //                     },
-        //                     error: function() {
-        //                         Swal.fire(
-        //                             'Oops!',
-        //                             'Adding new user has been canceled.',
-        //                             'error'
-        //                         )
-        //                     }
-        //                 });
+                                Swal.fire(
+                                    'Add New Alternatif!',
+                                    'New Alternatif Has Been Added.',
+                                    'success'
+                                )
+                                EmptyAddSan();
+                            },
+                            error: function() {
+                                Swal.fire(
+                                    'Oops!',
+                                    'Adding new Alternatif has been canceled.',
+                                    'error'
+                                )
+                            }
+                        });
 
 
 
-        //             }
-        //         })
-        //     } else {
-        //         Swal.fire(
-        //             'Oops!',
-        //             'Something Is Wrong!, Please Check Again!.',
-        //             'error'
-        //         )
-        //     }
-        // });
+                    }
+                })
+            } else {
+                Swal.fire(
+                    'Oops!',
+                    'Something Is Wrong!, Please Check Again!.',
+                    'error'
+                )
+            }
+        });
 
         // $('#btnEditUser').on('click', function() {
         //     if (cekEditUser() === false) {
@@ -520,7 +539,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         //                 var email = $("#edEmail").val();
         //                 var ids = $("#edIdUser").val();
         //                 $.ajax({
-        //                     url: 'http://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
+        //                     url: 'https://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
         //                     type: "PUT",
         //                     data: { name: name, gender: gender, email: email },
         //                     headers: {

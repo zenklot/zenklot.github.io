@@ -241,19 +241,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
     $(document).ready(function() {
 
-        loadJSON('http://spk-psi.herokuapp.com/api/v1/dta', function jmlDTA() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function jmlDTA() {
             $("#dta").html(json['data'].length);
         });
 
-        loadJSON('http://spk-psi.herokuapp.com/api/v1/alternatif', function jmlSantri() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', function jmlSantri() {
             $("#santri").html(json['data'].length);
         });
 
-        loadJSON('http://spk-psi.herokuapp.com/api/v1/criterias', function jmlCriteria() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', function jmlCriteria() {
             $("#criteria").html(json['data'].length);
         });
 
-        loadJSON('http://spk-psi.herokuapp.com/api/v1/enumerisation', function jmlEnumerisation() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation', function jmlEnumerisation() {
             $("#enumerisation").html(json['data'].length);
         });
     });

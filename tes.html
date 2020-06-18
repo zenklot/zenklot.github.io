@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title></title>
+</head>
+<body>
+ <input type="text" id="name" value="zamzam">
+ <input type="text" id="gender" value="male">
+ <input type="text" id="nik" value="41233123142131">
+
+
+ <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+ <script>
+  jQuery(function(){
+   update(); 
+   function update(){
+    let $name = jQuery("#name").val();
+    let $gender = jQuery("#gender").val();
+    let $nik = jQuery("#nik").val();
+    let $idd = '3';
+    let $noinduk = '14131231434343';
+    let $gender = 'male';
+    jQuery.ajax({
+     method: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+     data:{dta_id:$idd,no_induk_dta:$noinduk,name:$name,nik:$nik,gender:$gender}, // Set datatype - affects Accept header
+     url: "http://spk-psi.herokuapp.com/api/v1/alternatif/create", // A valid URL
+     headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cache-Control": "no-cache",
+      "X-HTTP-Method-Override": "POST"} // X-HTTP-Method-Override set to PUT.
+    });
+   }
+  });
+ </script>
+</body>
+</html>
