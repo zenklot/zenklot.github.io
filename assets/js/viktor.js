@@ -10,7 +10,7 @@ function loadJSON(path, callback) {
                 // Here the callback gets implemented
                 json = JSON.parse(xhr.responseText);
                 callback();
-                // }else if(xhr.status === 500){
+                // }else if(xhr.status === 1000){
                 // json = "error";
             } else {
                 // json = "error";
@@ -176,7 +176,7 @@ function getAlternatif() {
                 "<td>" + dta['name'] + "</td>" +
                 "<td>" + jk(dta['gender']) + "</td>" +
                 "<td>" + dta['nama_dta'] + "</td>" +
-                "<td><button class='btn btn-sm bg-danger' onclick='deleteSan(" + dta['id'] + ")'><i class='fas fa-trash fa-lg'></i></button> <button class='btn btn-sm bg-info' onclick='GetEditSan(" + dta['id'] + ")'><i class='fas fa-edit fa-lg'></i></button> <button class='btn btn-sm bg-success' onclick='GetDetSan(" + dta['id'] + ")'><i class='fas fa-eye fa-lg'></i></button></td>" +
+                "<td><button class='btn btn-sm bg-danger' onclick='deleteSan(" + dta['id'] + ")'><i class='fas fa-trash fa-lg'></i></button> <button class='btn btn-sm bg-info' onclick='GetEditSan(" + dta['id'] + ","+dta['dta_id']+")'><i class='fas fa-edit fa-lg'></i></button> <button class='btn btn-sm bg-success' onclick='GetDetSan(" + dta['id'] + ")'><i class='fas fa-eye fa-lg'></i></button></td>" +
                 "</tr>";
         }
         $('#test').html(table);
@@ -273,6 +273,50 @@ function GetEditENUM(id) {
     });
 }
 
+function GetEditSan(id,dtaId) {
+    // console.log(id);
+    $('#mdEditSan').modal('toggle');
+    $('#edIdSan').val(id);
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + dtaId, function dtaUser() {
+        $('#edParamDtaIn').val(json['data'][0]['no_statistik']);
+        $('#edParamDta').html(json['data'][0]['no_statistik']);
+
+        
+    });
+
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function dtaUser() {
+       hasil = json['data'];
+                var opsi = '';
+                opsi = "<option value='' data-statistik='' data-namedta=''>-</option>";
+                for (var i = 0; i < hasil.length; i++) {
+                    var dta = hasil[i];
+                    // console.log(dta['created_at'])
+                    if(dta['id'] == dtaId){
+                    opsi +=
+                        "<option value='" + dta['id'] + "' data-statistik='" + dta['no_statistik'] + "' data-namedta='" + dta['name'] + "' selected>" + dta['name'] + "</option>";    
+                    }else{
+                        opsi +=
+                        "<option value='" + dta['id'] + "' data-statistik='" + dta['no_statistik'] + "' data-namedta='" + dta['name'] + "'>" + dta['name'] + "</option>";
+                    }
+                    
+                }
+                $('#edDTAid').html(opsi);
+    });
+
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif/' + id, function dtaUser() {
+        var noInduk = json['data'][0]['no_induk_dta'];
+        // console.log(json['data'][0]['nama_dta']);
+        // $('#edDTAid').val(json['data'][0]['nama_dta']);
+        $('#edNik').val(json['data'][0]['nik']);
+        $('#edNameSan').val(json['data'][0]['name']);
+        $('#edGenderSan').val(json['data'][0]['gender']);
+        noInduk = noInduk.replace($('#edParamDtaIn').val(), "");
+        $('#edDtaParam').val(noInduk);
+    });
+
+
+}
+
 function GetDetUser(id) {
     // console.log(id);
     $('#mdDet').modal('toggle');
@@ -326,6 +370,23 @@ function GetDetENUM(id) {
 }
 
 
+function GetDetSan(id) {
+    // console.log(id);
+    $('#mdDetSan').modal('toggle');
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif/' + id, function dtaUser() {
+
+        $('#deDTAid').val(json['data'][0]['nama_dta']);
+        $('#deDtaParam').val(json['data'][0]['no_induk_dta']);
+        $('#deNik').val(json['data'][0]['nik']);
+        $('#deNameSan').val(json['data'][0]['name']);
+        $('#deGenderSan').val(json['data'][0]['gender']);
+        $('#deCreatedSan').val(json['data'][0]['created_at']);
+        $('#deUpdateSan').val(json['data'][0]['updated_at']);
+        $('#deHeadmasterSan').val(json['data'][0]['headmaster']);
+
+    });
+}
+
 function deleteUser(id) {
     Swal.fire({
         title: 'Delete this user?',
@@ -358,7 +419,7 @@ function deleteUser(id) {
             setTimeout(
                 function() {
                     getUsers();
-                }, 500);
+                }, 1000);
 
             // EmptyAddUser();
 
@@ -399,7 +460,7 @@ function deleteDTA(id) {
             setTimeout(
                 function() {
                     getDTA();
-                }, 500);
+                }, 1000);
 
             // EmptyAddUser();
 
@@ -440,7 +501,7 @@ function deleteCRT(id) {
             setTimeout(
                 function() {
                     getCriteria();
-                }, 500);
+                }, 1000);
 
             // EmptyAddUser();
 
@@ -481,7 +542,50 @@ function deleteENUM(id) {
             setTimeout(
                 function() {
                     getENUM();
-                }, 500);
+                }, 1000);
+
+            // EmptyAddUser();
+
+        }
+    })
+
+};
+
+
+
+function deleteSan(id) {
+    Swal.fire({
+        title: 'Delete this Alternatif ?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete Now!'
+    }).then((result) => {
+        if (result.value) {
+            // var id =  id;
+            $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/alternatif/' + id + '/delete',
+                type: 'DELETE',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                }
+            });
+
+            kosongkanTabel('ini_table');
+
+
+            Swal.fire(
+                'Delete Alternatif!',
+                'Delete Alternatif Has Been Success.',
+                'success'
+            )
+            setTimeout(
+                function() {
+                    getAlternatif();
+                }, 1000);
 
             // EmptyAddUser();
 
@@ -707,6 +811,20 @@ function cekEditDTA() {
 
     } else {
         return false;
+    }
+}
+
+
+function cekEditSan() {
+    var dtaId = $('#edDTAid').val();
+    var nik = $('#edNik').val();
+    var name = $('#edNameSan').val();
+    var induk = $('#edDtaParam').val();
+    // console.log(dtaId+" "+nik+" "+name+" "+induk)
+    if (dtaId == '' || cekAngka(nik) == false || cekAlpabet(name) == false || cekAngka(induk) == false) {
+        return false;
+    } else {
+        return true;
     }
 }
 

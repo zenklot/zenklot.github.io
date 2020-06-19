@@ -9,7 +9,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ADMIN | HOME</title>
+    <title>ADMIN | VALUE</title>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -264,6 +268,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../assets/js/adminlte.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- Jquery -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>  -->
     <!-- Datatable -->
@@ -286,7 +294,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
             // console.log(hasil);
             for (var i = 0; i < json['data'].length; i++) {
-                var judul = judul + "<th>" + json['data'][i]['alias'] + "</th>";
+                var judul = judul + "<th id='" + i + "' data-ids='" + json['data'][i]['id'] + "' data-kriteria='" + json['data'][i]['name'] + "'>" + json['data'][i]['name'] + "</th>";
             }
             // console.log($('#isiJudul').val())
             $('#judulKolom').html("<th>ID</th><th>Alternatif</th>" + judul);
@@ -320,12 +328,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "<td>" + hasil[i].alternatif_name + "</td>";
                 // "<td></td><td></td><td></td><td></td>"
                 // "</tr>";
+
+
                 for (var j = 0; j < $("#criteria").html(); j++) {
                     // console.log(hasil[i].value[j].criteria_name);
                     try {
-                        table += "<td>" + hasil[i].value[j].value + "</td>";
+                        table += "<td><input type='text'  class='form-control nilai' data-nama='" + hasil[i].alternatif_name + "' data-id='" + hasil[i].alternatif_id + "' data-idcrt='" + $('#' + j).data('ids') + "' data-idval='" + hasil[i].value[j].value_id + "' value='" + hasil[i].value[j].value + "' data-nama_krit='" + $('#' + j).data('kriteria') + "'></td>";
                     } catch {
-                        table += "<td>Kosong</td>";
+                        table += "<td><input type='text' class='form-control nilai' data-nama='" + hasil[i].alternatif_name + "' data-id='" + hasil[i].alternatif_id + "' data-idcrt='" + $('#' + j).data('ids') + "' data-idval='-' data-nama_krit='" + $('#' + j).data('kriteria') + "'></td>";
                     }
 
                     // ;
@@ -341,11 +351,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('#ini_table').DataTable({
                 "aaSorting": [],
                 "order": [],
+                "stateSave": true,
+                "info": true,
                 responsive: true,
                 "processing": true,
                 "lengthMenu": [
                     [-1, 10, 25, 50, 100, 150],
-                    ["All",10, 25, 50, 100, 150]
+                    ["All", 10, 25, 50, 100, 150]
                 ]
             });
         });
@@ -355,6 +367,97 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
+    $(document).on('blur', '.nilai', function() {
+        // var catatan  = $('#catatan').val();             
+        // $.ajax({
+        //     url : "<?php echo base_url('dashboard/tambah_catatan');?>",
+        //     method : "POST",
+        //     data : {catatan: catatan},
+        //     success: function(data){
+        //         alert('Catatan Berhasil Ditambahkan');
+        //         $('#tampil_pesanan').html(data);
+
+        //     }
+        // });
+        var ids = $(this).data("id");
+        var idCrt = $(this).data("idcrt");
+        var idVal = $(this).data("idval");
+        var nama = $(this).data("nama");
+        var kriteria = $(this).data("nama_krit");
+
+        var val = $(this).val();
+        val = val.trim();
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        // console.log(idCrt);
+        // console.log(ids + " " + idCrt + " " + idVal+" "+val);
+
+
+        if (val == '') {
+            // console.log('data kosong');
+            Toast.fire({
+                icon: 'warning',
+                title: ' Gagal Input/Ubah Nilai ' + kriteria + ' ' + nama
+            })
+        } else if (idVal == '-') {
+
+            $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/value/create', // url where to submit the request
+                type: "POST",
+                data: { criteria_id: idCrt, alternatif_id: ids, value: val },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                },
+                success: function() {
+                    console.log("Berhasil Tambah");
+
+
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Input Nilai ' + kriteria + ' ' + nama + ' = ' + val
+                    })
+
+
+                },
+                error: function() {
+
+                }
+            });
+
+        } else {
+            $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/value/' + idVal + '/update', // url where to submit the request
+                type: "PUT",
+                data: { criteria_id: idCrt, alternatif_id: ids, value: val },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                },
+                success: function() {
+                    console.log("Berhasil Update");
+                    Toast.fire({
+                        icon: 'info',
+                        title: ' Mengubah Nilai ' + kriteria + ' ' + nama + ' menjadi ' + val
+                    })
+
+                },
+                error: function() {
+
+                }
+            });
+        }
+
+
+
+
+
+    });
 
 
 

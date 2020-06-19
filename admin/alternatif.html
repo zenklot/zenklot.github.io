@@ -322,80 +322,136 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- Modal Edit-->
-    <div class="modal fade" id="mdEdit" tabindex="-1" role="dialog" aria-labelledby="mdEdit1" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+    <div class="modal fade" id="mdEditSan">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdEdit1">Modif User</h5>
+                    <h4 class="modal-title">Modif Alternatif</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" id="edIdSan">
+                    <input type="hidden" id="edDtaName">
+                    <input type="hidden" id="edParamDtaIn">
                     <input type="hidden" id="edIdUser">
-                    <div class="form-group">
-                        <label for="edEmail">Email address</label>
-                        <input type="email" class="form-control" id="edEmail" placeholder="Enter email">
-                        <span></span>
+                    <div class="form-group row">
+                        <label for="edDTAid" class="col-sm-2 col-form-label">DTA</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" style="width: 100%;" id="edDTAid">
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="edName">Full Name</label>
-                        <input type="text" class="form-control" id="edName" placeholder="Enter full name">
+                    <div class="form-group row">
+                        <label for="edDtaParam" class="col-sm-2 col-form-label">No Induk DTA</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="edParamDta"></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="No Induk DTA" id="edDtaParam">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control" style="width: 100%;" id="edGender">
-                            <option selected="selected" value="female">Female</option>
-                            <option value="male">Male</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="edNik" class="col-sm-2 col-form-label">NIK</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="edNik" placeholder="Enter NIK">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="edNameSan" class="col-sm-2 col-form-label">Full Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="edNameSan" placeholder="Enter full name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="edGenderSan" class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" style="width: 100%;" id="edGenderSan">
+                                <option selected="selected" value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnEditUser">Update User</button>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnEditSan">Save changes</button>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
+
     <!-- Modal Detail-->
-    <div class="modal fade" id="mdDet" tabindex="-1" role="dialog" aria-labelledby="mdDet1" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="mdDetSan" tabindex="-1" role="dialog" aria-labelledby="mdDet1" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdDet1">Detail User</h5>
+                    <h5 class="modal-title" id="mdDet1">Detail Alternatif</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="deEmail">Email address</label>
-                        <input type="email" class="form-control" id="deEmail" placeholder="Enter email" disabled="disabled">
+                   <div class="form-group row">
+                        <label for="deDTAid" class="col-sm-2 col-form-label">DTA</label>
+                        <div class="col-sm-10">
+                           <input type="text" class="form-control" placeholder="No Induk DTA" id="deDTAid" disabled="disabled">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="deName">Full Name</label>
-                        <input type="text" class="form-control" id="deName" placeholder="Enter full name" disabled="disabled">
+                    <div class="form-group row">
+                        <label for="deDtaParam" class="col-sm-2 col-form-label">No Induk DTA</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="No Induk DTA" id="deDtaParam" disabled="disabled">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control" style="width: 100%;" id="deGender" disabled="disabled">
-                            <option selected="selected" value="female">Female</option>
-                            <option value="male">Male</option>
-                        </select>
+                    <div class="form-group row">
+                        <label for="deNik" class="col-sm-2 col-form-label">NIK</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="deNik" placeholder="Enter NIK" disabled="disabled">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="deCreated">Date Created</label>
-                        <input type="text" class="form-control" id="deCreated" placeholder="Enter full name" disabled="disabled">
+                    <div class="form-group row">
+                        <label for="deNameSan" class="col-sm-2 col-form-label">Full Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="deNameSan" placeholder="Enter full name" disabled="disabled">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="deUpdate">Date Last Update</label>
-                        <input type="text" class="form-control" id="deUpdate" placeholder="Enter full name" disabled="disabled">
+                    <div class="form-group row">
+                        <label for="deGenderSan" class="col-sm-2 col-form-label">Gender</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" style="width: 100%;" id="deGenderSan" disabled="disabled">
+                                <option selected="selected" value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="deToken">Token Expired</label>
-                        <input type="text" class="form-control" id="deToken" placeholder="Date-Token-Expired" disabled="disabled">
+                     <div class="form-group row">
+                        <label for="deHeadmasterSan" class="col-sm-2 col-form-label">Headmaster</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="deHeadmasterSan" placeholder="Enter full name" disabled="disabled">
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="deCreatedSan" class="col-sm-2 col-form-label">Date Created</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="deCreatedSan" placeholder="Enter full name" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="deUpdateSan" class="col-sm-2 col-form-label">Date Last Update</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="deUpdateSan" placeholder="Enter full name" disabled="disabled">
+                    </div>
+                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -450,6 +506,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             // console.log(this.value);
         });
 
+        $('#edDTAid').on('change', function(e) {
+            var paramInduk = $("option:selected", this).data('statistik');
+            var dtaName = $("option:selected", this).data('namedta');
+            $('#edParamDta').html(paramInduk);
+            $('#edDtaName').val(dtaName);
+            $('#edParamDtaIn').val(paramInduk);
+            // console.log(this.value);
+            // console.log(paramInduk);
+        });
 
 
         $('#btnAddSan').on('click', function() {
@@ -471,7 +536,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         var nik = $('#inNik').val();
                         var name = $('#inNameSan').val();
                         var gender = $('#inGenderSan').val();
-                        console.log(dtaId+" "+induk+" "+nik+" "+name+" "+gender);
+                        // console.log(dtaId+" "+induk+" "+nik+" "+name+" "+gender);
                         $.ajax({
                             url: 'https://spk-psi.herokuapp.com/api/v1/alternatif/create', // url where to submit the request
                             type: "POST",
@@ -516,58 +581,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
         });
 
-        // $('#btnEditUser').on('click', function() {
-        //     if (cekEditUser() === false) {
-        //         Swal.fire(
-        //             'Oops!',
-        //             'Something Is Wrong!, Please Check Again!.',
-        //             'error'
-        //         )
-        //     } else {
-        //         Swal.fire({
-        //             title: 'Are you sure?',
-        //             text: "You won't be able to revert this!",
-        //             icon: 'warning',
-        //             showCancelButton: true,
-        //             confirmButtonColor: '#3085d6',
-        //             cancelButtonColor: '#d33',
-        //             confirmButtonText: 'Yes, Update This User'
-        //         }).then((result) => {
-        //             if (result.value) {
-        //                 var name = $("#edName").val();
-        //                 var gender = $("#edGender").val();
-        //                 var email = $("#edEmail").val();
-        //                 var ids = $("#edIdUser").val();
-        //                 $.ajax({
-        //                     url: 'https://spk-psi.herokuapp.com/api/v1/user/' + ids + '/update', // url where to submit the request
-        //                     type: "PUT",
-        //                     data: { name: name, gender: gender, email: email },
-        //                     headers: {
-        //                         "Content-Type": "application/x-www-form-urlencoded",
-        //                         "Cache-Control": "no-cache",
-        //                         "X-HTTP-Method-Override": "PUT"
-        //                     } // X-HTTP-Method-Override set to PUT.
-        //                 });
+        $('#btnEditSan').on('click', function() {
+            if (cekEditSan() === false) {
+                Swal.fire(
+                    'Oops!',
+                    'Something Is Wrong!, Please Check Again!.',
+                    'error'
+                )
+            } else {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Update This User'
+                }).then((result) => {
+                    if (result.value) {
+                        var ids = $('#edIdSan').val();
+                        var dtaId = $('#edDTAid').val();
+                        var induk = $('#edParamDtaIn').val() +""+$('#edDtaParam').val();
+                        var nik = $('#edNik').val();
+                        var name = $('#edNameSan').val();
+                        var gender = $('#edGenderSan').val();
 
-        //                 kosongkanTabel('ini_table');
-        //                  setTimeout(
-        //                             function() {
-        //                 getUsers();
-        //                             }, 500);
+                        $.ajax({
+                            url: 'https://spk-psi.herokuapp.com/api/v1/alternatif/' + ids + '/update', // url where to submit the request
+                            type: "PUT",
+                            data: { dta_id: dtaId, no_induk_dta: induk, name: name, nik: nik, gender: gender },
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                                "Cache-Control": "no-cache",
+                                "X-HTTP-Method-Override": "PUT"
+                            } // X-HTTP-Method-Override set to PUT.
+                        });
 
-        //                 $('#mdEdit').modal('toggle');
+                        kosongkanTabel('ini_table');
+                         setTimeout(
+                                    function() {
+                        getAlternatif();
+                                    }, 500);
 
-        //                 Swal.fire(
-        //                     'Update User!',
-        //                     'Update User Has Been Success.',
-        //                     'success'
-        //                 )
-        //                 EmptyAddUser();
+                        $('#mdEditSan').modal('toggle');
 
-        //             }
-        //         })
-        //     }
-        // });
+                        Swal.fire(
+                            'Update Alternatif!',
+                            'Update Alternatif Has Been Success.',
+                            'success'
+                        )
+                        EmptyAddSan();
+
+                    }
+                })
+            }
+        });
     });
 
 
