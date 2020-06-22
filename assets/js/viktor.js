@@ -1,7 +1,7 @@
 // GET JSON
 var json;
 
-function loadJSON(path, callback) {
+function loadJSON(path, card, callback) {
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function() {
@@ -10,6 +10,7 @@ function loadJSON(path, callback) {
                 // Here the callback gets implemented
                 json = JSON.parse(xhr.responseText);
                 callback();
+                $("."+card).children(".overlay").remove();
                 // }else if(xhr.status === 1000){
                 // json = "error";
             } else {
@@ -21,6 +22,7 @@ function loadJSON(path, callback) {
 
     // try {
     xhr.open("GET", path, true);
+    $("."+card).append("<div class='overlay'><i class='fas fa-2x fa-sync-alt fa-spin'></i></div>");
     xhr.send();
 
     return xhr.onreadystatechange();
@@ -51,7 +53,7 @@ function getUsers() {
     var men = 0;
     var women = 0;
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/users', function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/users',"tblUser",function dtaUser() {
         hasil = json['data'];
         $("#totUsr").html(hasil.length);
         var table = '';
@@ -78,6 +80,7 @@ function getUsers() {
         $('#ini_table').DataTable({
             responsive: true,
             "processing": true,
+            "stateSave": true,
             "lengthMenu": [
                 [10, 25, 50, 100, 150, -1],
                 [10, 25, 50, 100, 150, "All"]
@@ -112,6 +115,7 @@ function getDTA() {
         $('#ini_table').DataTable({
             responsive: true,
             "processing": true,
+            "stateSave": true,
             "lengthMenu": [
                 [10, 25, 50, 100, 150, -1],
                 [10, 25, 50, 100, 150, "All"]
@@ -149,6 +153,7 @@ function getCriteria() {
         $('#ini_table').DataTable({
             responsive: true,
             "processing": true,
+            "stateSave": true,
             "lengthMenu": [
                 [10, 25, 50, 100, 150, -1],
                 [10, 25, 50, 100, 150, "All"]
@@ -183,6 +188,7 @@ function getAlternatif() {
         $('#ini_table').DataTable({
             responsive: true,
             "processing": true,
+            "stateSave": true,
             "lengthMenu": [
                 [10, 25, 50, 100, 150, -1],
                 [10, 25, 50, 100, 150, "All"]
@@ -217,6 +223,7 @@ function getENUM() {
         $('#ini_table').DataTable({
             responsive: true,
             "processing": true,
+            "stateSave": true,
             "lengthMenu": [
                 [10, 25, 50, 100, 150, -1],
                 [10, 25, 50, 100, 150, "All"]
@@ -655,6 +662,11 @@ function cekAngka(angka) {
     return re.test(angka);
 }
 
+function cekNilai(nilai){
+    var re = /^[0-9\.]+$/;
+    return re.test(nilai);
+}
+
 function cekAddUser() {
     var nama = $('#inName').val();
     var email = $('#inEmail').val();
@@ -840,3 +852,4 @@ function validWeight() {
 
     setTimeout(validWeight, 5000);
 }
+

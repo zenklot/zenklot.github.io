@@ -175,7 +175,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-6">
-                            <div class="info-box">
+                            <div class="info-box tblUser">
                                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Total Data User :</span>
@@ -190,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
                         <div class="col-12 col-sm-6 col-md-6">
-                            <div class="info-box mb-3">
+                            <div class="info-box mb-3 tblUser">
                                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Rincian Data User :</span>
@@ -204,7 +204,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
+                            <div class="card tblUser">
                                 <div class="card-header content-justify-between">
                                     <div class="float-left">
                                         <h3 class="card-title">MANAGE USERS</h3>
@@ -229,6 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="clearfix"></div>
                                     <!-- /.card-body -->
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -392,6 +393,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../assets/js/viktor.js"></script>
     <script>
     $(document).ready(function() {
+
+
         getUsers();
 
         $('#btnAddUser').on('click', function() {

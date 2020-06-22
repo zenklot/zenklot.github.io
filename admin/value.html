@@ -198,6 +198,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="info-box-content">
                                     <span class="info-box-text">ENUMERISATION</span>
                                     <span class="info-box-number" id="enumerisation"></span>
+                                    <input type="hidden" id="arrEnum">
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -276,8 +277,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>  -->
     <!-- Datatable -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/sp-1.1.1/datatables.js"></script>
+
+
+     <script src="../assets/js/viktor.js"></script>
     <script>
     $(document).ready(function() {
+        var nVal = "";
 
         loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function jmlDTA() {
             $("#dta").html(json['data'].length);
@@ -301,8 +306,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             // $('#ini_table').DataTable();
         });
 
+
         loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation', function jmlEnumerisation() {
             $("#enumerisation").html(json['data'].length);
+           var enumer = '';
+            // var ar = [2,4,6,5];
+            // console.log(ar);
+            // console.log(json['data']);
+            for(var i in json['data']){
+                 // arr = JSON.parse(json['data']);
+                 enumer += json['data'][i]['name'];
+            }
+            $('#arrEnum').val(enumer);
+        // var arr = JSON.parse(json);
+            
+            // console.log(arr);
         });
         // console.log($('#isiJudul').val("1"));
         loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', function jmlSantri() {
@@ -311,7 +329,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         // console.log($('#isiJudul').val("1"));
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/first', function jmlSantri() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/first', function inpuValue() {
             // $("#santri").html(json['data'].length);
             hasil = json['data'];
 
@@ -367,44 +385,126 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-    $(document).on('blur', '.nilai', function() {
-        // var catatan  = $('#catatan').val();             
-        // $.ajax({
-        //     url : "<?php echo base_url('dashboard/tambah_catatan');?>",
-        //     method : "POST",
-        //     data : {catatan: catatan},
-        //     success: function(data){
-        //         alert('Catatan Berhasil Ditambahkan');
-        //         $('#tampil_pesanan').html(data);
+    $(document).on('focus', '.nilai', function() {
+        // var ids = $(this).data("id");
+        // var idCrt = $(this).data("idcrt");
+        // var idVal = $(this).data("idval");
+        // var nama = $(this).data("nama");
+        // var kriteria = $(this).data("nama_krit");
+        var val = $(this).val();
+        val = val.trim().toUpperCase();
+        nVal = val;
+        // console.log('ada fokus');
+        // console.log(ids+" "+idCrt+" "+idVal+" "+nama+" "+kriteria+" "+val);
+    });
 
-        //     }
-        // });
+    $(document).on('blur', '.nilai', function() {
         var ids = $(this).data("id");
         var idCrt = $(this).data("idcrt");
         var idVal = $(this).data("idval");
         var nama = $(this).data("nama");
         var kriteria = $(this).data("nama_krit");
-
         var val = $(this).val();
-        val = val.trim();
+        val = val.trim().toUpperCase();
+        var arr = $('#arrEnum').val();
+
+        
+
+        if(cekNilai(val) === true || (cekAlpabet(val) === true && val.length < 2 && arr.indexOf(val) != -1) || val === '-'){
+console.log(ids+" "+idCrt+" "+idVal+" "+nama+" "+kriteria+" "+val+" "+nVal);
+       
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000
         });
-        // console.log(idCrt);
-        // console.log(ids + " " + idCrt + " " + idVal+" "+val);
-
-
+ 
         if (val == '') {
             // console.log('data kosong');
             Toast.fire({
                 icon: 'warning',
                 title: ' Gagal Input/Ubah Nilai ' + kriteria + ' ' + nama
             })
-        } else if (idVal == '-') {
+            // console.log('tidak apa-apa');
+            $(this).val(val);
+            $(this).val(nVal);
+        } else if(val == nVal){
+            // console.log('tidak mengupdate data')
+            $(this).val(val);
+        }else if (val == '-'){
+            // console.log('Hapus Data');
+            $(this).val('');
+            
+     loadJSON('https://spk-psi.herokuapp.com/api/v1/values', function inpuValueCe() {
+            hasil = json['data'];
+            hasil = hasil.filter(a=>a.criteria_id == idCrt && a.alternatif_id == ids);
+            try{
+            var idValue = hasil[0].id;
+            
+            console.log(arr);
+             $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/value/' + idValue + '/delete', // url where to submit the request
+                type: "DELETE",
+                // data: { criteria_id: idCrt, alternatif_id: ids, value: val },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                },
+                success: function() {
+                    console.log("Berhasil Update");
+                    Toast.fire({
+                          icon: 'error',
+                        title: ' Menghapus Nilai ' + kriteria + ' ' + nama
+                    })
+                      
 
+                },
+                error: function() {
+
+                }
+            });
+         }catch{
+
+         }
+
+        });
+
+        }else if(nVal != ''){
+            console.log('update data nval');
+            $(this).val(val);
+            loadJSON('https://spk-psi.herokuapp.com/api/v1/values', function inpuValue() {
+            hasil = json['data'];
+            hasil = hasil.filter(a=>a.criteria_id == idCrt && a.alternatif_id == ids);
+            var idValue = hasil[0].id;
+            
+            console.log(arr);
+             $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/value/' + idValue + '/update', // url where to submit the request
+                type: "PUT",
+                data: { criteria_id: idCrt, alternatif_id: ids, value: val },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                },
+                success: function() {
+                    // console.log("Berhasil Update");
+                    Toast.fire({
+                        icon: 'info',
+                        title: ' Mengubah Nilai ' + kriteria + ' ' + nama + ' menjadi ' + val
+                    })
+                      
+
+                },
+                error: function() {
+
+                }
+            });
+
+        });
+        }else if(nVal == '' && idVal !== '-'){
+  $(this).val(val);
+            console.log('tambah data');
             $.ajax({
                 url: 'https://spk-psi.herokuapp.com/api/v1/value/create', // url where to submit the request
                 type: "POST",
@@ -414,23 +514,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "Cache-Control": "no-cache"
                 },
                 success: function() {
-                    console.log("Berhasil Tambah");
-
-
-
+                    // console.log("Berhasil Tambah");
                     Toast.fire({
                         icon: 'success',
                         title: ' Input Nilai ' + kriteria + ' ' + nama + ' = ' + val
                     })
-
-
                 },
                 error: function() {
 
                 }
             });
 
-        } else {
+        }else if(idVal != '-'){
+              $(this).val(val);
+             console.log('Update Data');
             $.ajax({
                 url: 'https://spk-psi.herokuapp.com/api/v1/value/' + idVal + '/update', // url where to submit the request
                 type: "PUT",
@@ -440,19 +537,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     "Cache-Control": "no-cache"
                 },
                 success: function() {
-                    console.log("Berhasil Update");
+                    // console.log("Berhasil Update");
                     Toast.fire({
                         icon: 'info',
                         title: ' Mengubah Nilai ' + kriteria + ' ' + nama + ' menjadi ' + val
-                    })
+                    });
+                  
 
                 },
                 error: function() {
 
                 }
             });
+        }else if (idVal == '-') {
+               $(this).val(val);
+            console.log('tambah data');
+            $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/value/create', // url where to submit the request
+                type: "POST",
+                data: { criteria_id: idCrt, alternatif_id: ids, value: val },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                },
+                success: function() {
+                    // console.log("Berhasil Tambah");
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Input Nilai ' + kriteria + ' ' + nama + ' = ' + val
+                    })
+                },
+                error: function() {
+
+                }
+            });
+
+        } 
+        }else{
+            // console.log('Inputan Salah');
+            $(this).val(nVal);
+          toastr.info('Input Nilai Salah!, Input Sesuai Aturan!');
         }
 
+        
 
 
 
