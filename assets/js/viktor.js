@@ -50,8 +50,14 @@ function jk(kel) {
 
 
 function getUsers() {
+
     var men = 0;
     var women = 0;
+    try{
+        kosongkanTabel("ini_table");
+    }catch{
+
+    }
 
     loadJSON('https://spk-psi.herokuapp.com/api/v1/users',"tblUser",function dtaUser() {
         hasil = json['data'];
@@ -94,7 +100,7 @@ function getUsers() {
 
 function getDTA() {
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function GetDta() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', "tblDta", function GetDta() {
         $("#totDTA").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -130,7 +136,7 @@ function getDTA() {
 function getCriteria() {
 
     var totalBobot = 0;
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', function GetDta() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', "tblCrt", function GetDta() {
         $("#totCriteria").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -166,7 +172,7 @@ function getCriteria() {
 
 function getAlternatif() {
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', function GetDta() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', "tblSan",function GetDta() {
         $("#totSan").html(json['data'].length);
         hasil = json['data'];
         var table = '';
@@ -202,9 +208,11 @@ function getAlternatif() {
 
 function getENUM() {
 
+
     var totalBobot = 0;
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation', function GetDta() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation', "tblEnum", function GetDta() {
         $("#totEnum").html(json['data'].length);
+        var enumer = '';
         hasil = json['data'];
         var table = '';
         for (var i = 0; i < hasil.length; i++) {
@@ -216,9 +224,11 @@ function getENUM() {
                 "<td>" + dta['name'] + "</td>" +
                 "<td>" + dta['value'] + "</td>" +
                 "<td><button class='btn btn-sm bg-danger' onclick='deleteENUM(" + dta['id'] + ")'><i class='fas fa-trash fa-lg'></i></button> <button class='btn btn-sm bg-info' onclick='GetEditENUM(" + dta['id'] + ")'><i class='fas fa-edit fa-lg'></i></button> <button class='btn btn-sm bg-success' onclick='GetDetENUM(" + dta['id'] + ")'><i class='fas fa-eye fa-lg'></i></button></td>" +
-                "</tr>"
+                "</tr>";
+             enumer += json['data'][i]['name'];
 
         }
+        $('#arrEnum').val(enumer);
         $('#test').html(table);
         $('#ini_table').DataTable({
             responsive: true,
@@ -239,7 +249,7 @@ function GetEditUser(id) {
     // console.log(id);
     $('#mdEdit').modal('toggle');
     $('#edIdUser').val(id);
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/user/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/user/' + id, "mdEdit", function dtaUser() {
         $('#edEmail').val(json['data'][0]['email']);
         $('#edName').val(json['data'][0]['name']);
         $('#edGender').val(json['data'][0]['gender']);
@@ -250,7 +260,7 @@ function GetEditDTA(id) {
     // console.log(id);
     $('#mdEditDTA').modal('toggle');
     $('#edIdDTA').val(id);
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + id, "mdEdit", function dtaUser() {
         $('#edStatis').val(json['data'][0]['no_statistik']);
         $('#edNameDta').val(json['data'][0]['name']);
         $('#edAddress').val(json['data'][0]['address']);
@@ -262,7 +272,7 @@ function GetEditCRT(id) {
     // console.log(id);
     $('#mdEditCRT').modal('toggle');
     $('#edIdCRT').val(id);
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/criteria/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criteria/' + id, "mdEdit", function dtaCrt() {
         $('#edCriteria').val(json['data'][0]['name']);
         $('#edAlias').val(json['data'][0]['alias']);
         $('#edCategory').val(json['data'][0]['category']);
@@ -274,7 +284,7 @@ function GetEditENUM(id) {
     // console.log(id);
     $('#mdEditENUM').modal('toggle');
     $('#edIdENUM').val(id);
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, "mdEdit", function dtaUser() {
         $('#edNameEnum').val(json['data'][0]['name']);
         $('#edValue').val(json['data'][0]['value'])
     });
@@ -284,14 +294,14 @@ function GetEditSan(id,dtaId) {
     // console.log(id);
     $('#mdEditSan').modal('toggle');
     $('#edIdSan').val(id);
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + dtaId, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + dtaId, "mdEdit", function dtaUser() {
         $('#edParamDtaIn').val(json['data'][0]['no_statistik']);
         $('#edParamDta').html(json['data'][0]['no_statistik']);
 
         
     });
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', "mdEdit", function dtaUser() {
        hasil = json['data'];
                 var opsi = '';
                 opsi = "<option value='' data-statistik='' data-namedta=''>-</option>";
@@ -310,7 +320,7 @@ function GetEditSan(id,dtaId) {
                 $('#edDTAid').html(opsi);
     });
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif/' + id, "mdEdit", function dtaUser() {
         var noInduk = json['data'][0]['no_induk_dta'];
         // console.log(json['data'][0]['nama_dta']);
         // $('#edDTAid').val(json['data'][0]['nama_dta']);
@@ -327,7 +337,7 @@ function GetEditSan(id,dtaId) {
 function GetDetUser(id) {
     // console.log(id);
     $('#mdDet').modal('toggle');
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/user/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/user/' + id, "mdDet", function dtaUser() {
         $('#deEmail').val(json['data'][0]['email']);
         $('#deName').val(json['data'][0]['name']);
         $('#deGender').val(json['data'][0]['gender']);
@@ -340,7 +350,7 @@ function GetDetUser(id) {
 function GetDetDTA(id) {
     // console.log(id);
     $('#mdDetDTA').modal('toggle');
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + id, "mdDet", function dtaUser() {
         $('#deStatis').val(json['data'][0]['no_statistik']);
         $('#deNameDta').val(json['data'][0]['name']);
         $('#deAddress').val(json['data'][0]['address']);
@@ -353,7 +363,7 @@ function GetDetDTA(id) {
 function GetDetCRT(id) {
     // console.log(id);
     $('#mdDetCRT').modal('toggle');
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/criteria/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criteria/' + id, "mdDet", function dtaUser() {
 
         $('#deCriteria').val(json['data'][0]['name']);
         $('#deAlias').val(json['data'][0]['alias']);
@@ -367,7 +377,7 @@ function GetDetCRT(id) {
 function GetDetENUM(id) {
     // console.log(id);
     $('#mdDetENUM').modal('toggle');
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id, "mdDet", function dtaUser() {
 
         $('#deNameEnum').val(json['data'][0]['name']);
         $('#deValue').val(json['data'][0]['value']);
@@ -380,7 +390,7 @@ function GetDetENUM(id) {
 function GetDetSan(id) {
     // console.log(id);
     $('#mdDetSan').modal('toggle');
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif/' + id, function dtaUser() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif/' + id, "mdDet", function dtaUser() {
 
         $('#deDTAid').val(json['data'][0]['nama_dta']);
         $('#deDtaParam').val(json['data'][0]['no_induk_dta']);
@@ -687,8 +697,11 @@ function cekAddCRT() {
     var alias = $('#inAlias').val();
     var category = $('#inCategory').val();
     var weight = $('#inWeight').val();
+    weight = weight.trim();
+    var total = $('#totBobot').html();
+    total = total.replace('%','');
 
-    if (criteria == '' || alias == '' || category == '' || cekAngka(weight) === false) {
+    if (criteria == '' || alias == '' || category == '' || cekAngka(weight) === false || (parseInt(weight) + parseInt(total)) > 100 || weight == 0 || parseInt(weight) <= 0) {
         return false;
     } else {
         return true;
@@ -699,8 +712,9 @@ function cekAddCRT() {
 function cekAddENUM() {
     var name = $('#inNameEnum').val();
     var value = $('#inValue').val();
-
-    if (name == '' || cekAngka(value) == false) {
+    name = name.trim().toUpperCase();
+    var arr = $('#arrEnum').val();
+    if (name == '' || cekAngka(value) == false || arr.indexOf(name) != -1) {
         return false;
     } else {
         return true;
@@ -785,6 +799,7 @@ function cekEditCRT() {
 function cekEditENUM() {
     var name = $('#edNameEnum').val();
     var value = $('#edValue').val();
+
 
     if (name == '' || value == '') {
         return false;

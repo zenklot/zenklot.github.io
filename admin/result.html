@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ADMIN | HOME</title>
+    <title>ADMIN | RESULT</title>
     <!-- DataTables -->
     <link rel="stylesheet" type="text/css" href="../plugins/DataTables/datatables.min.css" />
     <!-- Font Awesome Icons -->
@@ -20,6 +20,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Datatable -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/r-2.2.5/sp-1.1.1/datatables.css" /> -->
+
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+
+    <!-- MathJax -->
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -43,9 +53,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+          <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="../index.html" class="brand-link">
                 <img src="../assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">ADMIN</span>
             </a>
@@ -53,9 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
+                    <!-- <div class="image"> -->
+                    <!-- <img src="../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
+                    <!-- </div> -->
                     <div class="info">
                         <a href="#" class="d-block">NAMA ADMIN</a>
                     </div>
@@ -64,8 +74,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-th"></i>
+                            <a href="index.html" class="nav-link ">
+                                <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     HOME
                                 </p>
@@ -73,9 +83,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item has-treeview menu-close">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-cogs"></i>
                                 <p>
                                     MANAGEMENT
                                     <i class="right fas fa-angle-left"></i>
@@ -89,40 +99,69 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="dta.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DTA</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                             <!--    <li class="nav-item">
+                                    <a href="alternatif.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>SANTRI</p>
+                                        <p>ALTERNATIF</p>
                                     </a>
-                                </li>
-                                <li class="nav-item">
+                                </li> -->
+                                <!-- <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>SCORE</p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="criteria.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>CRITERIA</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="enumerisation.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>ENUMERISATION</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-microscope"></i>
+                                <p>
+                                    METODE VIKOR
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="alternatif.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ALTERNATIF</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="value.html" class="nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>VALUE</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="result.html" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>RESULT</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     LOGOUT
                                 </p>
@@ -141,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">HOME</h1>
+                            <h1 class="m-0 text-dark">ADMIN | VIKOR | RESULT</h1>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -152,8 +191,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                            <div class="info-box brdDta">
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-school"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">DTA</span>
                                     <span class="info-box-number" id="dta">
@@ -165,8 +204,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                            <div class="info-box mb-3 brdSan">
+                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">SANTRI</span>
                                     <span class="info-box-number" id="santri"></span>
@@ -179,8 +218,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                            <div class="info-box mb-3 brdCrt">
+                                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-tasks"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">CRITERIA</span>
                                     <span class="info-box-number" id="criteria"></span>
@@ -191,8 +230,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         <!-- /.col -->
                         <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                            <div class="info-box mb-3 brdAlt">
+                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-minus-circle"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">Alternatif Nilai Kosong</span>
                                     <span class="info-box-number" id="jmlNilai"></span>
@@ -204,21 +243,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
+
+<div class="row">
+    <div class="col-12">
+            <div class="card card-primary card-tabs">
+              <div class="card-header p-0 pt-1">
+                <ul class="nav nav-tabs" id="hasilLangkah" role="tablist">
+                     <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
+                                    </div>
+                  <li class="nav-item">
+                    <a class="nav-link " id="step1-tabs" data-toggle="pill" href="#steps1-con" role="tab" aria-controls="steps1-con" aria-selected="false">STEP 1</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="step2-tab" data-toggle="pill" href="#step2-con" role="tab" aria-controls="step2-con" aria-selected="false">STEP 2</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="step3-tab" data-toggle="pill" href="#step3-con" role="tab" aria-controls="step3-con" aria-selected="false">STEP 3</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="step4-tab" data-toggle="pill" href="#step4-con" role="tab" aria-controls="step4-con" aria-selected="false">STEP 4</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="step5-tab" data-toggle="pill" href="#step5-con" role="tab" aria-controls="step5-con" aria-selected="false">STEP 5</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="step6-tab" data-toggle="pill" href="#step6-con" role="tab" aria-controls="step6-con" aria-selected="false">STEP 6</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="step7-tab" data-toggle="pill" href="#step7-con" role="tab" aria-controls="step7-con" aria-selected="false">STEP 7</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" id="step8-tab" data-toggle="pill" href="#step8-con" role="tab" aria-controls="step8-con" aria-selected="true">HASIL</a>
+                  </li>
+
+                </ul>
+
+              </div>
+
+              <div class="card-body">
+                <div class="tab-content" id="hasilLangkahContent">
+                  <div class="tab-pane fade" id="steps1-con" role="tabpanel" aria-labelledby="step1-tabs">
+                        <p class="text-justify"><strong>Langkah 1 :</strong> Menyusun kriteria dan alternatif ke dalam bentuk matriks (<strong>F</strong>)</p>
                     <div class="row">
                         <div class="col-12">
-                            <div class="card card-success" id="my-card">
+                            <div class="card card-success lang1 collapsed-card" id="my-card">
                                 <div class="card-header">
                                     <h3 class="card-title">Langkah 1 : Matriks Keputusan (F)</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                         <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                     </div>
                                     <!-- /.card-tools -->
                                 </div>
                                 <!-- /.card-header -->
-                                <div class="card-body overflow-auto bagref">
+                                <div class="card-body overflow-auto bagref" style="display: none;">
                                     <input type="hidden" id="isiJudul">
                                     <table id="ini_table" class="table table-striped table-bordered hidden" style="width:100%;">
                                         <thead>
@@ -228,22 +311,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <tbody id="test">
                                         </tbody>
                                     </table>
-                                    <div class="clearfix"></div>
-                                    <div class="row mt-5">
+                                    <div class="clearfix"></div>loadJSON
+                                    
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                        </div>
+                    </div>
+                        <p class="text-justify">Lakukan Enumerisasi pada data yang bukan numerik.</p>
+                        <p class="text-center">Maka Matriks F :</p>
+                        <div class="row ">
                                         <div class="col-12">
-                                            <div class="card card-success" id="my-card">
+                                            <div class="card card-success lang1a collapsed-card" id="my-card">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">Langkah 1. : Matriks Keputusan (F)</h3>
+                                                    <h3 class="card-title">Langkah 1.1 : Matriks Keputusan (F)</h3>
                                                     <div class="card-tools">
                                                         <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                                         <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                                     </div>
                                                     <!-- /.card-tools -->
                                                 </div>
                                                 <!-- /.card-header -->
-                                                <div class="card-body overflow-auto bagref">
+                                                <div class="card-body overflow-auto bagref" style="display: none;">
                                                     <input type="hidden" id="isiJudul">
                                                     <table id="tabel_enum" class="table table-striped table-bordered hidden" style="width:100%;">
                                                         <thead>
@@ -259,26 +350,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                    
+                  </div>
+                  <div class="tab-pane fade" id="step2-con" role="tabpanel" aria-labelledby="step2-tab">
+                    <p class="text-justify"><strong>Langkah 2 : </strong>Menentukan bobot kriteria, dengan ketentuan sesuai persamaan :</p>
+                    <p class="text-center">$\sum_{j = 1}^{n} w_j=1$</p>
+                    <p class="text-justify">Dimana j=1,2,...n, nomor urutan kriteria/atribut dan w=bobot kriteria/atribut ke j.
+</p>
+ <div class="row">
                         <div class="col-12">
-                            <div class="card card-info">
+                            <div class="card card-info lang2 collapsed-card">
                                 <div class="card-header">
-                                    <h3 class="card-title">LANGKAH 2 : Bobot Kriteria (W)</h3>
+                                    <h3 class="card-title">Langkah 2 : Bobot Kriteria (W)</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                         <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                     </div>
                                     <!-- /.card-tools -->
                                 </div>
                                 <!-- /.card-header -->
-                                <div class="card-body overflow-auto bagref">
+                                <div class="card-body overflow-auto bagref" style="display: none;">
                                     <input type="hidden" id="isiJudul">
                                     <table id="tabel_langkah2" class="table table-striped table-bordered hidden" style="width:100%;">
                                         <thead>
@@ -293,22 +386,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- /.card-body -->
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div>                  </div>
+                  <div class="tab-pane fade" id="step3-con" role="tabpanel" aria-labelledby="step3-tab">
+                    <p class="text-justify">Untuk menentukan Matriks Normalisasi gunakan persaman :</p>
+                    <p class="text-center">$N_{ij}=\frac{(f^+\ -\ f_{ij})}{(f_j^+\ -\ f_j^-)}$</p>
+
+                    <!-- <p class="text-center">$f_j^+=\max(f_{1j},f_{2j},f_{3j},\cdots,f_{mj})$</p> -->
+                    <!-- <p class="text-center">$f_j^-=\min(f_{1j},f_{2j},f_{3j},\cdots,f_{mj})$</p> -->
+ <div class="row">
                         <div class="col-12">
-                            <div class="card card-primary">
+                            <div class="card card-primary lang3 collapsed-card">
                                 <div class="card-header">
-                                    <h3 class="card-title">LANGKAH 3 : Matriks Normalisasi (W)</h3>
+                                    <h3 class="card-title">LANGKAH 3 : Matriks Normalisasi (N)</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                         <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                     </div>
                                     <!-- /.card-tools -->
                                 </div>
                                 <!-- /.card-header -->
-                                <div class="card-body overflow-auto bagref">
+                                <div class="card-body overflow-auto bagref" style="display: none;">
                                     <input type="hidden" id="isiJudul">
                                     <table id="tabel_langkah3" class="table table-striped table-bordered hidden" style="width:100%;">
                                         <thead>
@@ -319,21 +418,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </tbody>
                                     </table>
                                     <div class="clearfix"></div>
-                                    <div class="row mt-5">
+
+                                    
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                           <div class="row mt-5">
                                         <div class="col-12">
-                                            <div class="card card-success" id="my-card">
+                                            <div class="card card-success lang3a collapsed-card" id="my-card">
                                                 <div class="card-header">
                                                     <h3 class="card-title">Langkah 3. : Normalisasi Matriks (N)</h3>
                                                     <div class="card-tools">
                                                         <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                                         <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                                     </div>
                                                     <!-- /.card-tools -->
                                                 </div>
                                                 <!-- /.card-header -->
-                                                <div class="card-body overflow-auto bagref">
+                                                <div class="card-body overflow-auto bagref" style="display: none;">
                                                     <input type="hidden" id="isiJudul">
                                                     <table id="tabel_langkah3a" class="table table-striped table-bordered hidden" style="width:100%;">
                                                         <thead>
@@ -349,24 +453,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <div class="row">
+                           
+                            
+                            
+                        </div>
+                    </div>                  </div>
+                  <div class="tab-pane fade" id="step4-con" role="tabpanel" aria-labelledby="step4-tab">
+ <div class="row">
                                 <div class="col-12">
-                                    <div class="card card-info">
+                                    <div class="card card-info lang4 collapsed-card">
                                         <div class="card-header">
                                             <h3 class="card-title">LANGKAH 4 : Menentukan nilai terbobot dari data ternormalisasi untuk setiap alternatif dan kriteria</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                 <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                                 <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                             </div>
                                             <!-- /.card-tools -->
                                         </div>
                                         <!-- /.card-header -->
-                                        <div class="card-body overflow-auto bagref">
+                                        <div class="card-body overflow-auto bagref" style="display: none;">
                                             <input type="hidden" id="isiJudul">
                                             <table id="tabel_langkah4" class="table table-striped table-bordered hidden" style="width:100%;">
                                                 <thead>
@@ -381,22 +488,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <!-- /.card-body -->
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div>                  </div>
+                  <div class="tab-pane fade" id="step5-con" role="tabpanel" aria-labelledby="step5-tab">
+ <div class="row">
                                 <div class="col-12">
-                                    <div class="card card-info">
+                                    <div class="card card-info lang5 collapsed-card">
                                         <div class="card-header">
                                             <h3 class="card-title">LANGKAH 5 : Menghitung Nilai Utility Measure (S) dan Regret Measure (R)</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                 <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                                 <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                             </div>
                                             <!-- /.card-tools -->
                                         </div>
                                         <!-- /.card-header -->
-                                        <div class="card-body overflow-auto bagref">
+                                        <div class="card-body overflow-auto bagref" style="display: none;">
                                             <input type="hidden" id="isiJudul">
                                             <table id="tabel_langkah5" class="table table-striped table-bordered hidden" style="width:100%;">
                                                 <thead>
@@ -411,22 +519,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <!-- /.card-body -->
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div>                  </div>
+                  <div class="tab-pane fade" id="step6-con" role="tabpanel" aria-labelledby="step6-tab">
+<div class="row">
                                 <div class="col-12">
-                                    <div class="card card-info">
+                                    <div class="card card-info lang6 collapsed-card">
                                         <div class="card-header">
                                             <h3 class="card-title">LANGKAH 6 : Menghitung indeks VIKOR (Q)</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                 <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                                 <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                             </div>
                                             <!-- /.card-tools -->
                                         </div>
                                         <!-- /.card-header -->
-                                        <div class="card-body overflow-auto bagref">
+                                        <div class="card-body overflow-auto bagref" style="display: none">
                                             <input type="hidden" id="isiJudul">
                                             <table id="tabel_langkah6" class="table table-striped table-bordered hidden" style="width:100%;">
                                                 <thead>
@@ -445,22 +554,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <!-- /.card-body -->
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div>                  </div>
+                  <div class="tab-pane fade" id="step7-con" role="tabpanel" aria-labelledby="step7-tab">
+<div class="row">
                                 <div class="col-12">
-                                    <div class="card card-info">
+                                    <div class="card card-info lang7 collapsed-card">
                                         <div class="card-header">
                                             <h3 class="card-title">LANGKAH 7 : Perangkingan Alternatif (Q)</h3>
                                             <div class="card-tools">
                                                 <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                 <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
                                                 <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> -->
                                             </div>
                                             <!-- /.card-tools -->
                                         </div>
                                         <!-- /.card-header -->
-                                        <div class="card-body overflow-auto bagref">
+                                        <div class="card-body overflow-auto bagref" style="display: none;">
                                             <input type="hidden" id="isiJudul">
                                             <table id="tabel_langkah7" class="table table-striped table-bordered hidden" style="width:100%;">
                                                 <thead>
@@ -476,10 +586,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </tbody>
                                             </table>
                                             <div class="clearfix"></div>
-                                            <div class="mb-5"></div>
-                                            <div class="card card-info">
+                                           
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                                           </div>
+                                        <div class="tab-pane fade active show" id="step8-con" role="tabpanel" aria-labelledby="step8-tabs">
+                                              <div class="card card-info lang7a ">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">LANGKAH 7 : Perangkingan Alternatif (Q)</h3>
+                                                    <h3 class="card-title">HASIL PERANGKINGAN METODE VIKOR</h3>
                                                     <div class="card-tools">
                                                         <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="https://spk-psi.herokuapp.com/api/v1/alternatif" data-source-selector="#card-refresh-content" data-load-on-init="false"><i class="fas fa-sync-alt"></i></button>
                                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -507,14 +624,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="clearfix"></div>
                                                 </div>
                                                 <!-- /.card-body -->
-                                            </div>
+                                            </div>  
                                         </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+</div>
+        <!-- /.row -->
+
+
+                    
+                   
+                   
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content -->
@@ -558,12 +681,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $(document).ready(function() {
 
 
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', function jmlDTA() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', 'brdDta', function jmlDTA() {
             $("#dta").html(json['data'].length);
         });
 
 
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', function jmlCriteria() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', 'brdCrt', function jmlCriteria() {
             $("#criteria").html(json['data'].length);
             var judul = "";
             // var hasil = json['data'];
@@ -589,13 +712,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
 
         // console.log($('#isiJudul').val("1"));
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', function jmlSantri() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/alternatif', 'brdSan', function jmlSantri() {
             $("#santri").html(json['data'].length);
         });
 
 
         // console.log($('#isiJudul').val("1"));
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/first', function SolveFirst() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/first', 'lang1',function SolveFirst() {
             // $("#santri").html(json['data'].length);
             var jmlKosong = 0;
             hasil = json['data'];
@@ -648,7 +771,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         // });
 
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/two', function SolveTwo() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/two','lang1a', function SolveTwo() {
             // $("#santri").html(json['data'].length);
             // var jmlKosong = 0;
             hasil = json['data'];
@@ -698,7 +821,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
 
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/fjmaxmin', function SolveFjmaxmin() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/fjmaxmin', 'lang2', function SolveFjmaxmin() {
             // $("#santri").html(json['data'].length);
             // var jmlKosong = 0;
             hasil = json['data'];
@@ -765,7 +888,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', function SolveW() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', 'lang3', function SolveW() {
             // $("#santri").html(json['data'].length);
             // var jmlKosong = 0;
             hasil = json['data'];
@@ -809,7 +932,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/normalization', function SolveTwo() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/normalization', 'lang3a', function SolveTwo() {
         // $("#santri").html(json['data'].length);
         // var jmlKosong = 0;
         hasil = json['data'];
@@ -860,7 +983,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/weighted', function SolveTwo() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/weighted', 'lang4', function SolveTwo() {
         // $("#santri").html(json['data'].length);
         // var jmlKosong = 0;
         hasil = json['data'];
@@ -915,7 +1038,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/weighted', function SolveTwo() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/weighted', 'lang5',function SolveTwo() {
         // $("#santri").html(json['data'].length);
         // var jmlKosong = 0;
         hasil = json['data'];
@@ -970,7 +1093,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/srmaxmin', function SolveSix() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/srmaxmin', 'lang6', function SolveSix() {
         // $("#santri").html(json['data'].length);
         // var jmlKosong = 0;
         hasil = json['data'];
@@ -1004,7 +1127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/q', function SolveQ() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/q', 'lang7', function SolveQ() {
         // $("#santri").html(json['data'].length);
         // var jmlKosong = 0;
         hasil = json['data'];
@@ -1045,21 +1168,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 
-    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/q', function SolveQ() {
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/q', 'lang7a', function SolveQ() {
 hasil = json['data'];
 
             
-        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/v05', function SolveQ() {
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/v05', 'lang7a', function SolveQ() {
             var v5 = json['data'];
             v5.sort(function(a, b) {
                 return (a['alternatif_id'] > b['alternatif_id']) ? 1 : ((a['alternatif_id'] < b['alternatif_id']) ? -1 : 0);
             });
-            loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/v06', function SolveQ() {
+            loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/v06', 'lang7a', function SolveQ() {
                 var v6 = json['data'];
                 v6.sort(function(a, b) {
                 return (a['alternatif_id'] > b['alternatif_id']) ? 1 : ((a['alternatif_id'] < b['alternatif_id']) ? -1 : 0);
             });
-                loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/v07', function SolveQ() {
+                loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/v07', 'lang7a', function SolveQ() {
                     var v7 = json['data'];
                     v7.sort(function(a, b) {
                 return (a['alternatif_id'] > b['alternatif_id']) ? 1 : ((a['alternatif_id'] < b['alternatif_id']) ? -1 : 0);
