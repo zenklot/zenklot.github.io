@@ -46,6 +46,15 @@ function jk(kel) {
 }
 
 
+function dtaName(id){
+var response = $.ajax({ type: "GET",   
+                        url: 'https://spk-psi.herokuapp.com/api/v1/dta/'+id,
+                        async: false
+                      }).responseText;
+var hasil = JSON.parse(response);
+return hasil['data'][0]['name'];
+}
+
 
 
 
@@ -97,6 +106,55 @@ function getUsers() {
 
 }
 
+
+function getOperator() {
+
+    var men = 0;
+    var women = 0;
+    try{
+        kosongkanTabel("ini_table");
+    }catch{
+
+    }
+
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/operators',"tblUser",function dtaUser() {
+        hasil = json['data'];
+        $("#totUsr").html(hasil.length);
+        var table = '';
+        for (var i = 0; i < hasil.length; i++) {
+            var dta = hasil[i];
+            // console.log(dta['created_at'])
+            table +=
+                "<tr>" +
+                "<td>" + (i + 1) + "</td>" +
+                "<td>" + dta['name'] + "</td>" +
+                "<td>" + dtaName(dta['dta_id']) + "</td>" +
+                "<td>" + jk(dta['gender']) + "</td>" +
+                "<td>" + dta['email'] + "</td>" +
+                "<td><button class='btn btn-sm bg-danger' onclick='deleteOperator(" + dta['id'] + ")'><i class='fas fa-trash fa-lg'></i></button> <button class='btn btn-sm bg-info' onclick='GetEditOperator(" + dta['id'] + ","+dta['dta_id'] + ")'><i class='fas fa-edit fa-lg'></i></button> <button class='btn btn-sm bg-success' onclick='GetDetOperator(" + dta['id'] + ")'><i class='fas fa-eye fa-lg'></i></button></td>" +
+                "</tr>";
+            if (json['data'][i]['gender'] == 'male') {
+                men = men + 1;
+            } else if (json['data'][i]['gender'] == 'female') {
+                women = women + 1;
+            }
+        }
+        $("#rinUsr").html("Laki-Laki : " + men + "<br>" + "Perempuan : " + women);
+
+        $('#test').html(table);
+        $('#ini_table').DataTable({
+            responsive: true,
+            "processing": true,
+            "stateSave": true,
+            "lengthMenu": [
+                [10, 25, 50, 100, 150, -1],
+                [10, 25, 50, 100, 150, "All"]
+            ]
+        });
+
+    });
+
+}
 
 function getDTA() {
 
@@ -256,6 +314,39 @@ function GetEditUser(id) {
     });
 }
 
+
+function GetEditOperator(id,dtaId) {
+    // console.log(id);
+    $('#mdEdit').modal('toggle');
+    $('#edIdUser').val(id);
+    
+ loadJSON('https://spk-psi.herokuapp.com/api/v1/dta', "mdEdit", function dtaUser() {
+       hasil = json['data'];
+                var opsi = '';
+                opsi = "<option value='' data-statistik='' data-namedta=''>-</option>";
+                for (var i = 0; i < hasil.length; i++) {
+                    var dta = hasil[i];
+                    // console.log(dta['created_at'])
+                    if(dta['id'] == dtaId){
+                    opsi +=
+                        "<option value='" + dta['id'] + "' data-statistik='" + dta['no_statistik'] + "' data-namedta='" + dta['name'] + "' selected>" + dta['name'] + "</option>";    
+                    }else{
+                        opsi +=
+                        "<option value='" + dta['id'] + "' data-statistik='" + dta['no_statistik'] + "' data-namedta='" + dta['name'] + "'>" + dta['name'] + "</option>";
+                    }
+                    
+                }
+                $('#edDTAid').html(opsi);
+    });
+
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/operator/' + id, "mdEdit", function dtaUser() {
+        $('#edEmail').val(json['data'][0]['email']);
+        $('#edName').val(json['data'][0]['name']);
+        $('#edGender').val(json['data'][0]['gender']);
+        
+    });
+}
+
 function GetEditDTA(id) {
     // console.log(id);
     $('#mdEditDTA').modal('toggle');
@@ -344,6 +435,28 @@ function GetDetUser(id) {
         $('#deCreated').val(json['data'][0]['created_at']);
         $('#deUpdate').val(json['data'][0]['updated_at']);
         $('#deToken').val(json['data'][0]['token_exp']);
+    });
+}
+
+
+function GetDetOperator(id) {
+    // console.log(id);
+    $('#mdDet').modal('toggle');
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/operator/' + id, "mdDet", function dtaOperator() {
+        $('#deEmail').val(json['data'][0]['email']);
+        $('#deName').val(json['data'][0]['name']);
+        $('#deGender').val(json['data'][0]['gender']);
+        $('#deCreated').val(json['data'][0]['created_at']);
+        $('#deUpdate').val(json['data'][0]['updated_at']);
+        $('#deToken').val(json['data'][0]['token_exp']);
+        sid = json['data'][0]['dta_id'];
+        console.log(sid);
+        loadJSON('https://spk-psi.herokuapp.com/api/v1/dta/' + sid, "mdDet", function dtaGetDta() {
+            $('#deDTAid').val(json['data'][0]['name']);
+
+        });
+        
+        
     });
 }
 
@@ -436,6 +549,47 @@ function deleteUser(id) {
             setTimeout(
                 function() {
                     getUsers();
+                }, 1000);
+
+            // EmptyAddUser();
+
+        }
+    })
+
+};
+
+function deleteOperator(id) {
+    Swal.fire({
+        title: 'Delete this Operator?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete Now!'
+    }).then((result) => {
+        if (result.value) {
+            // var id =  id;
+            $.ajax({
+                url: 'https://spk-psi.herokuapp.com/api/v1/operator/' + id + '/delete',
+                type: 'DELETE',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Cache-Control": "no-cache"
+                }
+            });
+
+            kosongkanTabel('ini_table');
+
+
+            Swal.fire(
+                'Delete Operator!',
+                'Delete Operator Has Been Success.',
+                'success'
+            )
+            setTimeout(
+                function() {
+                    getOperator();
                 }, 1000);
 
             // EmptyAddUser();
@@ -622,6 +776,11 @@ function EmptyAddUser() {
     $('#inEmail').val('');
     $('#inName').val('');
 };
+function EmptyAddOperator() {
+    $('#inEmail').val('');
+    $('#inName').val('');
+    $('#inDTAid').val('-');
+};
 
 function EmptyAddDTA() {
     $('#inStatis').val('');
@@ -686,6 +845,18 @@ function cekAddUser() {
         } else {
             return false;
         }
+    } else {
+        return false;
+    }
+}
+
+function cekAddOperator() {
+    var dtaId = $('#inDTAid').val();
+    var nama = $('#inName').val();
+    var email = $('#inEmail').val();
+    console.log(nama+" "+email);
+    if (cekAlpabet(nama) == true && cekEmail(email) == true && dtaId != '') {
+        return true;
     } else {
         return false;
     }
@@ -783,6 +954,17 @@ function cekEditUser() {
     }
 }
 
+function cekEditOperator() {
+    var nama = $('#edName').val();
+    var email = $('#edEmail').val();
+    var dtaId = $('#edDTAid').val();
+    if (cekAlpabet(nama) == true && cekEmail(email) == true && dtaId != '') {
+            return true;
+    } else {
+        return false;
+    }
+}
+
 function cekEditCRT() {
     var criteria = $('#edCriteria').val();
     var alias = $('#edAlias').val();
@@ -868,3 +1050,44 @@ function validWeight() {
     setTimeout(validWeight, 5000);
 }
 
+
+
+function printHasil() {
+var columns = [{title:"Nama DTA", dataKey: "dta_name"}, {title:"Nama Santri", dataKey: "alternatif_name"}, {title:"Rank (0.5)", dataKey: "rank"}, {title:"Rank (0.6)", dataKey: "rankv6"}, {title:"Rank (0.7)", dataKey: "rankv7"}];
+v5 = $("#v5").val();
+
+var rows = JSON.parse(v5);
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+
+var doc = new jsPDF();
+doc.setProperties({
+    title: 'DSS VIKOR',
+    subject: 'Santri Berprestasi di Madrasah DTA se Kelurahan Karanganyar',
+    author: 'Zam zam Saeful Bahtiar & Raisa Supriatna',
+    keywords: 'DSS, Vikor, DTA, Santri Berprestasi',
+    creator: 'Noname'
+});
+doc.autoTable(columns, rows, {
+    margin: {top: 25},
+    addPageContent: function(data) {
+        doc.setFont("times");
+        doc.setFontStyle("bold");
+        doc.text("LAPORAN HASIL PERHITUNGAN DSS VIKOR", 15, 10);
+        doc.setFontStyle("normal");
+        doc.text("Santri Berprestasi di Madrasah DTA se Kelurahan Karanganyar", 15, 15);
+        doc.setFontSize(11);
+        doc.text("Print : " + dateTime, 195, 20, "right");
+        
+    }
+});
+doc.save('DSS Vikor '+date+'.pdf');
+
+}
+
+function tampilLangkah(){
+     $('.lang').removeClass('d-none');
+     $('#tmplLang').hide();
+}
