@@ -32,6 +32,41 @@
 </head>
 
 <body id="page-top">
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v7.0&appId=2639474882995745&autoLogAppEvents=1" nonce="5a1n6837"></script>
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '2639474882995745',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v7.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+    
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+// FB.getLoginStatus(function(response) {
+//     statusChangeCallback(response);
+// });
+
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+</script>
      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <script>
       function onSignIn(googleUser) {
@@ -79,6 +114,8 @@
                 <p class="text-white mb-5" style="color: rgb(40,45,50);">Sistem Pendukung Keputusan Santri Berprestasi di Madrasah DTA se Kelurahan Karanganyar Dengan Metode VIKOR</p>
                 <!-- <button type="button" class="btn btn-success btn-xl js-scroll-trigger" data-toggle="modal" data-target="#exampleModal" >LOGIN</button> -->
                 <a href="http://spk-psi.herokuapp.com/api/v1/auth/google" class="btn btn-success btn-xl js-croll-trigger">LOGIN</a>
+                <div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false" data-width="" onlogin="checkLoginState();" scope="public_profile,email"></div>
+                
 
             </div>
         </div>
