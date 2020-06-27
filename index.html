@@ -52,7 +52,6 @@
     });
   }
 
-
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '2639474882995745',
@@ -78,14 +77,20 @@
 
  
   function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
+    // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+     console.log(response);
     });
   }
 
+
+function logout(){
+    FB.logout(function(response) {
+   // Person is now logged out
+});
+
+}
 </script>
 
     <!-- <div id="fb-root"></div> -->
@@ -123,7 +128,7 @@ function checkLoginState() {
   });
 }
 </script> -->
-     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<!--      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -139,7 +144,7 @@ function checkLoginState() {
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
       }
-    </script>
+    </script> -->
 
 <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button> -->
@@ -154,6 +159,7 @@ function checkLoginState() {
                     <li class="nav-item text-white" role="presentation"><a class="nav-link js-scroll-trigger" href="admin/index.html" style="color: rgb(162,168,174);">ABOUT</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#portfolio" style="color: rgb(162,168,174);">CONTACT</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link border rounded border-secondary js-scroll-trigger" href="#login" style="color: rgb(162,168,174);">LOGIN</a></li>
+                    <li class="nav-item"><button class="btn btn-danger" onclick="logout()">Logout</button></li>
                 </ul>
             </div>
         </div>
