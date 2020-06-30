@@ -424,7 +424,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script>
     $(document).ready(function() {
 
-
         getOperator();
 
         $('#addOperator').on('click', function() {
@@ -467,7 +466,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             type: "POST",
                             data: { dta_id: dta_id, name: name, gender: gender, email: email },
                             headers: {
-                                "Authorization": "Bearer"+window.localStorage.getItem('token'),
+                                "Authorization": "Bearer" + window.localStorage.getItem('token'),
                                 "Content-Type": "application/x-www-form-urlencoded",
                                 "Cache-Control": "no-cache"
                             },
@@ -537,7 +536,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             type: "PUT",
                             data: { dta_id: dta_id, name: name, gender: gender, email: email },
                             headers: {
-                                "Authorization": "Bearer"+window.localStorage.getItem('token'),
+                                "Authorization": "Bearer" + window.localStorage.getItem('token'),
                                 "Content-Type": "application/x-www-form-urlencoded",
                                 "Cache-Control": "no-cache",
                                 "X-HTTP-Method-Override": "PUT"

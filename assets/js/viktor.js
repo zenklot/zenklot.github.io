@@ -51,6 +51,9 @@ function jk(kel) {
 function dtaName(id){
 var response = $.ajax({ type: "GET",   
                         url: 'https://spk-psi.herokuapp.com/api/v1/dta/'+id,
+                        beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer'+window.localStorage.getItem('token'));
+    },
                         async: false
                       }).responseText;
 var hasil = JSON.parse(response);

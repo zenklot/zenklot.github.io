@@ -239,9 +239,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div id="alkur" class="d-none">
                                 <div class="alert alert-danger" role="alert">
                                     <h4 class="alert-heading">ERROR!</h4>
-                                    <p>Pastikan untuk mengeisi semua nilai santri terlebih dahulu!</p>
+                                    <p id="err1"></p>
                                     <hr>
-                                    <p class="mb-0">Hasil perhitungan akan tampil jika semua nilai telah diinput</p>
+                                    <p class="mb-0" id="err2"></p>
                                 </div>
                             </div>
                             <div id="alnol">
@@ -613,6 +613,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <div class="d-none">
                                                             <div class="loadkosong"></div>
                                                             <textarea name="" id="v5" cols="30" rows="10"></textarea>
+                                                            <input type="hidden" name="" id="totBobot">
                                                         </div>
                                                         <div class="d-none" id="hasilvikor">
                                                             <div class="row mb-3">
@@ -713,6 +714,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $("#santri").html(json['data'].length);
         });
 
+    var totalBobot = 0;
+    loadJSON('https://spk-psi.herokuapp.com/api/v1/criterias', "tblCrt", function GetDta() {
+        $("#totCriteria").html(json['data'].length);
+        hasil = json['data'];
+        for (var i = 0; i < hasil.length; i++) {
+            var dta = hasil[i];
+            totalBobot = totalBobot + dta['weight'];
+        }
+        $("#totBobot").val(totalBobot);
+    });
+
         loadJSON('https://spk-psi.herokuapp.com/api/v1/solve/first', 'brdAlt', function SolveFirst() {
             var jmlKosong = 0;
             hasil = json['data'];
@@ -740,11 +752,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
 
             $('#jmlNilai').html(jmlKosong);
+
             if (jmlKosong > 0) {
                 $('#alkur').removeClass('d-none');
                 $('#alkur').addClass('d-block');
+                $('#err1').html("Pastikan untuk mengisi semua nilai santri terlebih dahulu!");
+                $('#err2').html("Hasil perhitungan akan tampil jika semua nilai telah diinput");
                 $('#alnol').addClass('d-none');
-
+            }else if(totalBobot !== 100){
+                $('#alkur').removeClass('d-none');
+                $('#alkur').addClass('d-block');
+                $('#err1').html("Pastikan untuk mengisi total bobot dengan total 100%");
+                $('#err2').html("Hasil perhitungan akan tampil jika total bobot = 100%");
+                $('#alnol').addClass('d-none');
             }
             $('#test').html(table);
             $('#ini_table').DataTable({

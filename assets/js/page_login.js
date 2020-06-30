@@ -18,6 +18,7 @@ function login(){
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             // Request finished. Do processing here.
             let data = JSON.parse(xhr.responseText);
+            // console.log(data);
             window.localStorage.setItem('token',data.access_token);
             window.localStorage.setItem('admin-name',data.name);
             window.location.replace('/admin');
