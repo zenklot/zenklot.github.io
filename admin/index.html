@@ -55,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- <img src="../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
                     <!-- </div> -->
                     <div class="info">
-                        <a href="#" class="d-block">NAMA ADMIN</a>
+                        <a href="#" id="admin-name" class="d-block">NAMA ADMIN</a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -154,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" id="logout" class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     LOGOUT
@@ -312,6 +312,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         };
 
         xhr.open("GET", path, true);
+        xhr.setRequestHeader('Authorization', 'Bearer'+window.localStorage.getItem('token'));
         xhr.send();
         return xhr.onreadystatechange();
     }
@@ -320,6 +321,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     // this will not work unless you get the response
     // console.log(object);
+    if (localStorage.getItem("token") === null) {
+        window.location.replace('../');
+    }
+    document.getElementById("admin-name").innerText = window.localStorage.getItem('admin-name');
     </script>
 </body>
 

@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- <img src="../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
                     <!-- </div> -->
                     <div class="info">
-                        <a href="#" class="d-block">NAMA ADMIN</a>
+                        <a href="#" id="admin-name" class="d-block">NAMA ADMIN</a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -162,7 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" id="logout" class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     LOGOUT
@@ -561,6 +561,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             type: "POST",
                             data: { dta_id: dtaId, no_induk_dta: induk, name: name, nik: nik, gender: gender },
                             headers: {
+                                "Authorization": "Bearer"+window.localStorage.getItem('token'),
                                 "Content-Type": "application/x-www-form-urlencoded",
                                 "Cache-Control": "no-cache"
                             },
@@ -630,6 +631,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             type: "PUT",
                             data: { dta_id: dtaId, no_induk_dta: induk, name: name, nik: nik, gender: gender },
                             headers: {
+                                "Authorization": "Bearer"+window.localStorage.getItem('token'),
                                 "Content-Type": "application/x-www-form-urlencoded",
                                 "Cache-Control": "no-cache",
                                 "X-HTTP-Method-Override": "PUT"
