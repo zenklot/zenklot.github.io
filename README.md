@@ -5,6 +5,7 @@ We use php (Lumen Laravel Framework) and javascript as programming languange
 
 ## deployed in
 Frontend : https://dss-vikor.netlify.app/
+
 Backend : https://spk-psi.herokuapp.com/
 
 ## thanks to: 
@@ -13,6 +14,7 @@ And all who supported us
 
 ## contributor
 Raisa Supriatna https://github.com/zenklot/
+
 Zam Zam Saeful Bahtiar https://github.com/bekerz18/
 
 ### report
