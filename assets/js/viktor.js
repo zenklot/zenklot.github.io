@@ -18,12 +18,14 @@ function loadJSON(path, card, callback) {
                 // callback();
             }
         }
-    };
+    }
 
     // try {
     xhr.open("GET", path, true);
+    xhr.setRequestHeader('Authorization', 'Bearer'+window.localStorage.getItem('token'));
     $("."+card).append("<div class='overlay'><i class='fas fa-2x fa-sync-alt fa-spin'></i></div>");
     xhr.send();
+    console.log(window.localStorage.getItem('token'));
 
     return xhr.onreadystatechange();
     // } catch (err) {
@@ -1091,3 +1093,14 @@ function tampilLangkah(){
      $('.lang').removeClass('d-none');
      $('#tmplLang').hide();
 }
+function logout(){
+    window.localStorage.removeItem('token');
+    window.location.replace('../');
+}
+document.getElementById("logout").addEventListener('click',logout,false);
+
+if (localStorage.getItem("token") === null) {
+    window.location.replace('../');
+}
+
+document.getElementById("admin-name").innerText = window.localStorage.getItem('admin-name');
