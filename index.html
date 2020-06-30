@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <title>DSS VIKTOR</title>
+    <title>DSS VIKOR</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -32,122 +32,7 @@
 </head>
 
 <body id="page-top">
-    <script>
-
-  function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    console.log('statusChangeCallback');
-    console.log(response);                   // The current login status of the person.
-    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-      testAPI();  
-    } else {                                 // Not logged into your webpage or we are unable to tell.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this webpage.';
-    }
-  }
-
-
-  function checkLoginState() {               // Called when a person is finished with the Login Button.
-    FB.getLoginStatus(function(response) {   // See the onlogin handler
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '2639474882995745',
-      cookie     : true,                     // Enable cookies to allow the server to access the session.
-      xfbml      : true,                     // Parse social plugins on this webpage.
-      version    : 'v7.0'           // Use this Graph API version for this call.
-    });
-
-
-    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-      statusChangeCallback(response);        // Returns the login status.
-    });
-  };
-
-  
-  (function(d, s, id) {                      // Load the SDK asynchronously
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
- 
-  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    // console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-     console.log(response);
-    });
-  }
-
-
-function logout(){
-    FB.logout(function(response) {
-   // Person is now logged out
-});
-
-}
-</script>
-
-    <!-- <div id="fb-root"></div> -->
-<!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v7.0&appId=2639474882995745&autoLogAppEvents=1" nonce="5a1n6837"></script> -->
-  <!--   <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '2639474882995745',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v7.0'
-    });
-      
-    FB.AppEvents.logPageView();   
-    
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
-
-// FB.getLoginStatus(function(response) {
-//     statusChangeCallback(response);
-// });
-
-
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-}
-</script> -->
-<!--      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-    <script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-      }
-    </script> -->
-
-<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button> -->
+   
 
 <div id="status"></div>
     <nav class="navbar navbar-dark navbar-expand-sm fixed-top" id="mainNav">
@@ -158,8 +43,7 @@ function checkLoginState() {
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item text-white" role="presentation"><a class="nav-link js-scroll-trigger" href="admin/index.html" style="color: rgb(162,168,174);">ABOUT</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#portfolio" style="color: rgb(162,168,174);">CONTACT</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link border rounded border-secondary js-scroll-trigger" href="#login" style="color: rgb(162,168,174);">LOGIN</a></li>
-                    <li class="nav-item"><button class="btn btn-danger" onclick="logout()">Logout</button></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link border rounded border-secondary js-scroll-trigger" href="#login" style="color: rgb(162,168,174);" data-toggle="modal" data-target="#modal-login">LOGIN</a></li>
                 </ul>
             </div>
         </div>
@@ -179,11 +63,9 @@ function checkLoginState() {
             <!-- </div> -->
             <div class="col-lg-8 mx-auto">
                 <p class="text-white mb-5" style="color: rgb(40,45,50);">Sistem Pendukung Keputusan Santri Berprestasi di Madrasah DTA se Kelurahan Karanganyar Dengan Metode VIKOR</p>
-                <!-- <button type="button" class="btn btn-success btn-xl js-scroll-trigger" data-toggle="modal" data-target="#exampleModal" >LOGIN</button> -->
-                <!-- <a href="http://spk-psi.herokuapp.com/api/v1/auth/google" class="btn btn-success btn-xl js-croll-trigger">LOGIN</a> -->
-                <div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false" data-width="" onlogin="checkLoginState();" scope="public_profile,email"></div>
+                <button type="button" class="btn btn-success btn-xl js-scroll-trigger" data-toggle="modal" data-target="#modal-login" >LOGIN</button>
                 
-
+             
             </div>
         </div>
             <!-- </div> -->
@@ -236,21 +118,29 @@ function checkLoginState() {
     </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <div class="form-group">
+          <label for="email-login">Email</label>
+          <input type="email" id="email-login" class="form-control" placeholder="Silahkan masukan email">
+        </div>
+        <div class="form-group">
+            <label for="password-login">Password</label>
+            <input type="password" id="password-login" class="form-control" placeholder="Silahkan masukan password">
+          </div>
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="button" id="btn-login" class="btn btn-primary">Login</button>
+      </div>
     </div>
   </div>
 </div>
@@ -278,6 +168,7 @@ function checkLoginState() {
         });
 
     </script>
+    <script src="assets/js/page_login.js"></script>
 </body>
 
 </html>

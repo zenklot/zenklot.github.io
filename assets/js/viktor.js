@@ -18,12 +18,14 @@ function loadJSON(path, card, callback) {
                 // callback();
             }
         }
-    };
+    }
 
     // try {
     xhr.open("GET", path, true);
+    xhr.setRequestHeader('Authorization', 'Bearer'+window.localStorage.getItem('token'));
     $("."+card).append("<div class='overlay'><i class='fas fa-2x fa-sync-alt fa-spin'></i></div>");
     xhr.send();
+    
 
     return xhr.onreadystatechange();
     // } catch (err) {
@@ -533,6 +535,7 @@ function deleteUser(id) {
                 url: 'https://spk-psi.herokuapp.com/api/v1/user/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
+                    "Authorization": "Bearer"+window.localStorage.getItem('token'),
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Cache-Control": "no-cache"
                 }
@@ -574,6 +577,7 @@ function deleteOperator(id) {
                 url: 'https://spk-psi.herokuapp.com/api/v1/operator/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
+                    "Authorization": "Bearer"+window.localStorage.getItem('token'),
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Cache-Control": "no-cache"
                 }
@@ -615,6 +619,7 @@ function deleteDTA(id) {
                 url: 'https://spk-psi.herokuapp.com/api/v1/dta/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
+                    "Authorization": "Bearer"+window.localStorage.getItem('token'),
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Cache-Control": "no-cache"
                 }
@@ -656,6 +661,7 @@ function deleteCRT(id) {
                 url: 'https://spk-psi.herokuapp.com/api/v1/criteria/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
+                    "Authorization": "Bearer"+window.localStorage.getItem('token'),
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Cache-Control": "no-cache"
                 }
@@ -697,6 +703,7 @@ function deleteENUM(id) {
                 url: 'https://spk-psi.herokuapp.com/api/v1/enumerisation/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
+                    "Authorization": "Bearer"+window.localStorage.getItem('token'),
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Cache-Control": "no-cache"
                 }
@@ -740,6 +747,7 @@ function deleteSan(id) {
                 url: 'https://spk-psi.herokuapp.com/api/v1/alternatif/' + id + '/delete',
                 type: 'DELETE',
                 headers: {
+                    "Authorization": "Bearer"+window.localStorage.getItem('token'),
                     "Content-Type": "application/x-www-form-urlencoded",
                     "Cache-Control": "no-cache"
                 }
@@ -1091,3 +1099,14 @@ function tampilLangkah(){
      $('.lang').removeClass('d-none');
      $('#tmplLang').hide();
 }
+function logout(){
+    window.localStorage.removeItem('token');
+    window.location.replace('../');
+}
+document.getElementById("logout").addEventListener('click',logout,false);
+
+if (localStorage.getItem("token") === null) {
+    window.location.replace('../');
+}
+
+document.getElementById("admin-name").innerText = window.localStorage.getItem('admin-name');
